@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-   <a href="index3.html" class="brand-link"> 
+   <a href="index3.html" class="brand-link">
        {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
        <span>Company Name</span>
     </a>
@@ -15,14 +15,24 @@
             </div>
             <div class="pull-left info">
                 <p style="color:white">Super Admin</p>
-                {{-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a>  --}}
-                
+                <div class="" aria-labelledby="">
+                    <a class="" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div> {{-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a>  --}}
+
             </div>
-            
+
         </div>
-           
-            
-       
+
+
+
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -37,7 +47,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview menu-open">    
+                <li class="nav-item has-treeview menu-open">
                     <a href="/lead-introducers" class="nav-link">
                         <i class="nav-icon fas fa-industry"></i>
                         <p>
@@ -45,7 +55,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview menu-open">    
+                <li class="nav-item has-treeview menu-open">
                     <a href="/creditors" class="nav-link">
                         <i class="nav-icon fas fa-calculator"></i>
                         <p>
@@ -85,7 +95,7 @@
                         </p>
                     </a>
                 </li>
-            </ul>    
+            </ul>
             <ul class="nav nav-treeview">
 {{--                        <li class="nav-item">--}}
 {{--                            <a href="#" class="nav-link active">--}}
