@@ -26,14 +26,21 @@ Route::get('/lead-introducers/create', 'LeadIntroducersController@create');
 Route::post('/lead-introducer', 'LeadIntroducersController@store');
 Route::get('/lead-introducers/edit/{id}', 'LeadIntroducersController@edit');
 Route::post('/lead-introducers/update/{id}', 'LeadIntroducersController@update');
+Route::delete('/lead-introducer/{id}', 'LeadIntroducersController@destroy');
 
 Route::get('/creditors', 'CreditorsController@index');
 Route::get('/creditors/create', 'CreditorsController@create');
-Route::get('/creditors/edit', 'CreditorsController@edit');
+Route::post('/creditor', 'CreditorsController@store');
+Route::get('/creditors/edit/{id}', 'CreditorsController@edit');
+Route::post('/creditors/update/{id}', 'CreditorsController@update');
+Route::delete('/creditor/{id}', 'CreditorsController@destroy');
 
 Route::get('/super-agents', 'SuperAgentsController@index');
 Route::get('/super-agents/create', 'SuperAgentsController@create');
-Route::get('/super-agents/edit', 'SuperAgentsController@edit');
+Route::post('/super-agent', 'SuperAgentsController@store');
+Route::get('/super-agents/edit/{id}', 'SuperAgentsController@edit');
+Route::post('/super-agents/update/{id}', 'SuperAgentsController@update');
+Route::delete('/super-agent/{id}', 'SuperAgentsController@destroy');
 
 Route::get('/customers', 'CustomerController@index');
 

@@ -90,7 +90,7 @@
     </form>
   </div>
 
-  <link rel="stylesheet" href="/css/ionicons.min.css">  
+<link rel="stylesheet" href="/css/ionicons.min.css">  
 <script src="/js/adminlte.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/app.js"></script>
