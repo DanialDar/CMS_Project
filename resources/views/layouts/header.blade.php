@@ -1,3 +1,31 @@
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<title>Admin Management System</title>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/AdminLte.min.css">
+<link rel="stylesheet" href="/css/AdminLte.css">
+{{-- <link rel="stylesheet" href="/css/bootstrap.min.css"> --}}
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/ionicons.min.css">
+<link rel="stylesheet" href="/css/_all-skin.min.css">
+
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Theme style -->
+{{-- <link rel="stylesheet" href="{{ asset("admin-lte/node_modules/dist/css/adminlte.css")}}"> --}}
+  <!-- Theme style -->
+{{-- <link rel="stylesheet" href="{{ asset("admin-lte/node_modules/dist/css/adminlte.min.css")}}"> --}}
+
+<link rel="stylesheet" href="{{ asset("admin-lte/node_modules/bootstrap/dist/css/bootstrap.min.css")}}">
+  <!-- Font Awesome -->
+  {{-- <link rel="stylesheet" href="{{ asset("node_modules/font-awesome/css/font-awesome.min.css")}}"> --}}
+  <!-- Ionicons -->
+  {{-- <link rel="stylesheet" href="{{ asset("node_modules/Ionicons/css/ionicons.min.css")}}"> --}}
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset("node_modules/datatables.net/css/dataTables.bootstrap.min.css")}}">
+</head>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
