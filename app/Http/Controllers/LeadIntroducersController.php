@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\LeadIntroducer;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class LeadIntroducersController extends Controller
 {
@@ -49,7 +50,7 @@ class LeadIntroducersController extends Controller
         $name = $_POST['company_name'];
         $email = $_POST['contact_email'];
         $role_id = 2;
-        $password = $_POST['contact_password'];
+        $password =Hash::make($_POST['contact_password']);
         DB::insert('insert into users (name,email,role_id,password,company_id) values(?,?,?,?,?)',[$name,$email,$role_id,$password,$id]);
         return redirect('/lead-introducers');
 
