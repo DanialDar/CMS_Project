@@ -9,7 +9,8 @@
     <br>
     <!-- /.box-header -->
     <!-- form start -->
-    <form class="form-horizontal">
+    <form  method="POST" action="/super-agent" enctype="multipart/form-data" class="form-horizontal">
+      @csrf
       <div class="box-body">
         <br>    
         <div class="row">
@@ -32,21 +33,42 @@
         <br>
         <div class="row">
             <div class="col-md-3">
-                <label for="contact_number" class="control-label" style="padding-left:50px">Contact Number</label>
+                <label for="password" class="control-label" style="padding-left:50px">Password</label>
             </div>          
             <div class="col-md-8">
-                <input type="text" class="form-control" name="contact_name" id="contact_number" placeholder="Enter Contact Number">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
             </div>
         </div>
         <br>
         <div class="row">
+            <div class="col-md-3">
+                <label for="contact" class="control-label" style="padding-left:50px">Contact Number</label>
+            </div>          
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="contact" id="contact" placeholder="Enter Contact Number">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="designation" class="control-label" style="padding-left:50px">Agent Role</label>
+            </div>
+            <div class="col-md-8">
+                <select class="form-control" name="designation" id="designation">
+                    <option value="advisor" selected>Advisor</option>
+                    <option value="agent">Agent</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        {{-- <div class="row">
             <div class="col-md-3">
                 <label for="role" class="control-label" style="padding-left:50px">Agent Role</label>
             </div>          
             <div class="col-md-8">
                 <input type="text" class="form-control" name="role" id="role" placeholder="Select Role">
             </div>
-        </div>
+        </div> --}}
         <br>
       </div>
       <br>

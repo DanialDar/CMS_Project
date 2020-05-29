@@ -37,7 +37,16 @@
             <td>{{ $company->address }}</td>
             <td>
             <a style="margin-right:20px" href="/lead-introducers/edit/{{$company->id}}"><i class="nav-icon fas fa-edit"></i></a>
-              <a style="margin-right:20px" href=""><i class="nav-icon fas fa-trash"></i></a>
+            {{-- <a style="margin-right:20px" href=""> --}}
+              {{-- <i class="nav-icon fas fa-trash"> --}}                
+                  <a onclick="clicked({{$company->id}})" href="#" style="text-decoration: none"> 
+                    <i class="nav-icon fas fa-trash">
+                      <form method="POST" id="del{{$company->id}}" action="/lead-introducer/{{$company->id}}">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                      </form>                
+                    </i>            
+                  </a>
             </td>
           </tr>
           @endforeach
@@ -47,5 +56,13 @@
     </div>
     <!-- /.box-body -->
   </div>
-  
+  <script>
+    function clicked(id){
+        if(confirm("Are You Sure ?")){
+            document.getElementById('del'+id).submit();
+        }
+        else{
+        }
+    }
+  </script>
 @endsection   

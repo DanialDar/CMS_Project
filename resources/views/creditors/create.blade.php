@@ -9,9 +9,10 @@
     <br>
     <!-- /.box-header -->
     <!-- form start -->
-    <form class="form-horizontal">
+    <form method="POST" action="/creditor" enctype="multipart/form-data" class="form-horizontal">
+      @csrf  
       <div class="box-body">
-        <br>    
+        <br>
         <div class="row">
             <div class="col-md-3">
                 <label for="name" class="control-label" style="padding-left:50px">Creditor Name</label>
@@ -44,7 +45,7 @@
                 <label for="contact_number" class="control-label" style="padding-left:50px">Contact Number</label>
             </div>          
             <div class="col-md-8">
-                <input type="text" class="form-control" name="contact_name" id="contact_number" placeholder="Enter Contact Number">
+                <input type="text" class="form-control" name="contact_number" id="contact_number" placeholder="Enter Contact Number">
             </div>
         </div>
         <br>

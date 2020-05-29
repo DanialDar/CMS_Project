@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Creditor;
+use App\User;
+use Illuminate\Support\Facades\DB;
 
 class CreditorsController extends Controller
 {
@@ -13,7 +16,9 @@ class CreditorsController extends Controller
      */
     public function index()
     {
-        return view('creditors.index');
+        $creditors = DB::table('creditors')->get();
+        return view('creditors.index',compact(['creditors']));
+        
     }
 
     /**
@@ -34,7 +39,12 @@ class CreditorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $address = $_POST['postal_address'];
+        $cont_number = $_POST['contact_number'];
+        DB::insert('insert into creditors (name,email,postal_address,contact_number) values(?,?,?,?)',[$name,$email,$address,$cont_number]);
+        return redirect('/creditors');
     }
 
     /**
@@ -56,7 +66,8 @@ class CreditorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $creditor = Creditor::find($id);
+        return view('creditors.edit',compact(['creditor']));
     }
 
     /**
@@ -68,7 +79,13 @@ class CreditorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $creditor = Creditor::find($id);
+        $creditor->name = $request->input("name");
+        $creditor->email = $request->input("email");
+        $creditor->postal_address = $request->input("postal_address");
+        $creditor->contact_number = $request->input("contact_number");
+        $creditor->save();
+        return redirect('/creditors');
     }
 
     /**
@@ -79,6 +96,8 @@ class CreditorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $creditor = Creditor::findOrFail($id);
+        $creditor->delete();
+        return redirect('/creditors');
     }
 }

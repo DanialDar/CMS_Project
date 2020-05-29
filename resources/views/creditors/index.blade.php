@@ -19,51 +19,46 @@
       <table id="example1" class="table table-bordered table-striped">
         <thead>
         <tr>
-          <th>Company Name</th>
-          <th>Contact Name</th>
+          <th>Creditor Name</th>
+          <th>Email</th>
           <th>Contact Number</th>
-          <th>Company Code</th>
-          <th>Adress</th>
+          <th>Postal Adress</th>
           <th>Action</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-          <td>Trident</td>
-          <td>Internet
-            Explorer 4.0
-          </td>
-          <td>Win 95+</td>
-          <td> 4</td>
-          <td>X</td>
-          <td>
-            <a style="margin-right:20px" href=""><i class="fa fa-edit"></i></a>
-            <a style="margin-right:20px" href=""><i class="fa fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Trident</td>
-          <td>Internet
-            Explorer 5.0
-          </td>
-          <td>Win 95+</td>
-          <td>5</td>
-          <td>C</td>
-        </tr>
-        <tr>
-          <td>Trident</td>
-          <td>Internet
-            Explorer 5.5
-          </td>
-          <td>Win 95+</td>
-          <td>5.5</td>
-          <td>A</td>
-        </tr>
-        
+        <tbody>          
+          @foreach($creditors as $creditor)
+          <tr>
+            <td>{{ $creditor->name }}</td>
+            <td>{{ $creditor->email }}</td>
+            <td>{{ $creditor->contact_number }}</td>
+            <td>{{ $creditor->postal_address }}</td>
+            <td>
+              <a style="margin-right:20px" href="/creditors/edit/{{$creditor->id}}"><i class="nav-icon fas fa-edit"></i></a>
+              <a onclick="clicked({{$creditor->id}})" href="#" style="text-decoration: none"> 
+                <i class="nav-icon fas fa-trash">
+                  <form method="POST" id="del{{$creditor->id}}" action="/creditor/{{$creditor->id}}">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                  </form>                
+                </i>            
+              </a>
+            </td>
+          </tr>
+          @endforeach
+               
         </tbody>
       </table>
     </div>
     <!-- /.box-body -->
   </div>
-  
+  <script>
+    function clicked(id){
+        if(confirm("Are You Sure ?")){
+            document.getElementById('del'+id).submit();
+        }
+        else{
+        }
+    }
+  </script>
 @endsection   
