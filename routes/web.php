@@ -15,10 +15,12 @@ Route::get('/', 'HomeController@dashboard');
 
 //Routes for Agents
 
-Route::get('/agent/{id}', 'AgentController@index');
+Route::get('/agent', 'AgentController@index');
 Route::get('/agents/create', 'AgentController@create');
 Route::post('/agent', 'AgentController@store');
-
+Route::get('/agents/edit/{id}', 'AgentController@edit');
+Route::post('/agent/update/{id}', 'AgentController@update');
+Route::delete('/agent/{id}', 'AgentController@destroy');
 
 //routes for customer
 
@@ -28,6 +30,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'HomeController@dashboard');
 
+//Routes for Lead Introducers
 Route::get('/lead-introducers', 'LeadIntroducersController@index');
 Route::get('/lead-introducers/create', 'LeadIntroducersController@create');
 Route::post('/lead-introducer', 'LeadIntroducersController@store');
@@ -35,6 +38,7 @@ Route::get('/lead-introducers/edit/{id}', 'LeadIntroducersController@edit');
 Route::post('/lead-introducers/update/{id}', 'LeadIntroducersController@update');
 Route::delete('/lead-introducer/{id}', 'LeadIntroducersController@destroy');
 
+//Routes for Creditors
 Route::get('/creditors', 'CreditorsController@index');
 Route::get('/creditors/create', 'CreditorsController@create');
 Route::post('/creditor', 'CreditorsController@store');
@@ -42,6 +46,7 @@ Route::get('/creditors/edit/{id}', 'CreditorsController@edit');
 Route::post('/creditors/update/{id}', 'CreditorsController@update');
 Route::delete('/creditor/{id}', 'CreditorsController@destroy');
 
+//Routes for Super Agents
 Route::get('/super-agents', 'SuperAgentsController@index');
 Route::get('/super-agents/create', 'SuperAgentsController@create');
 Route::post('/super-agent', 'SuperAgentsController@store');
