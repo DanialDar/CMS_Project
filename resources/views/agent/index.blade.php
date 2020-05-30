@@ -39,7 +39,7 @@
               {{-- <i class="nav-icon fas fa-trash"> --}}
                   <a onclick="clicked({{$agent->id}})" href="#" style="text-decoration: none">
                     <i class="nav-icon fas fa-trash">
-                      <form method="POST" id="del{{$agent->id}}" action="/lead-introducer/{{$agent->id}}">
+                      <form method="POST" id="del{{$agent->id}}" action="/agent/{{$agent->id}}">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE">
                       </form>

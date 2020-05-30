@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use App\Model\Agent;
+use App\User;
 
 class AgentController extends Controller
 {
@@ -15,9 +16,10 @@ class AgentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $agents = DB::table('agents')->where('lead_introducer_id', $id)->get();;
+        $lead_introducer_id = Auth::user()->id;
+        $agents = DB::table('agents')->where('lead_introducer_id', $lead_introducer_id)->get();;
         return view('agent.index',compact(['agents']));
         //
     }
@@ -57,7 +59,7 @@ class AgentController extends Controller
         $password = Hash::make($_POST['password']);
         DB::insert('insert into users (name,email,role_id,password,agent_id) values(?,?,?,?,?)',[$agent_name,$email,$role_id,$password,$id]);
 
-        return redirect('/');
+        return redirect('/agent');
         //
     }
 
@@ -80,7 +82,9 @@ class AgentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $agent = Agent::find($id);
+        $loginUsers = DB::table('users')->where('agent_id', $agent->id)->get();
+        return view('agent.edit',compact(['agent', 'loginUsers']));
     }
 
     /**
@@ -92,7 +96,27 @@ class AgentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $agent = Agent::find($id);
+        // dd($request->input("name"));
+        $agent->name = $request->input("name");
+        $agent->email = $request->input("email");
+        $agent->contact_number = $request->input("contact_number");
+        $agent->lead_introducer_id = Auth::user()->id;
+        $agent->save();
+
+        $agent_id = $request->input("agent_id");
+
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $role_id = 4;
+        $password = $_POST['password'];
+        DB::table('users')
+            ->where('agent_id', $agent_id)
+            ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);
+
+        // $agents = DB::table('agents')->where('lead_introducer_id', $agent->lead_introducer_id)->get();;
+        return redirect('/agent');
+        // return redirect('/');
     }
 
     /**
@@ -103,6 +127,11 @@ class AgentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $agent = Agent::findOrFail($id);
+        $agent->delete();
+
+        DB::table('users')->where('agent_id', $agent->id)->delete();
+
+        return redirect('/agent');
     }
 }

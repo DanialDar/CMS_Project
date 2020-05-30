@@ -26,7 +26,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <label for="contact_email" class="control-label" style="padding-left:50px">Agent Login Email</label>
+                <label for="agent_email" class="control-label" style="padding-left:50px">Agent Login Email</label>
             </div>
             <div class="col-md-8">
                 <input type="text" class="form-control" name="agent_email" id="agent_email" placeholder="Enter Agent Email">
@@ -35,7 +35,7 @@
         <br>
         <div class="row">
             <div class="col-md-3">
-                <label for="contact_password" class="control-label" style="padding-left:50px">Agent Login Password</label>
+                <label for="password" class="control-label" style="padding-left:50px">Agent Login Password</label>
             </div>
             <div class="col-md-8">
                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter Agent Password">
@@ -57,7 +57,7 @@
       <!-- /.box-body -->
       <div class="box-footer">
         <button class="btn btn-info">
-            <a href="/lead-introducers" style="color:white">Cancel</a>
+            <a href="/agent" style="color:white">Cancel</a>
         </button>
         <button type="submit" class="btn btn-success">Create</button>
 

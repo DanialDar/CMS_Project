@@ -171,7 +171,8 @@
                         </a>
                     </li>
                     <li class="nav-item has-treeview menu-open">
-                        <a href="/agent/{{\Illuminate\Support\Facades\Auth::user()->id}}" class="nav-link">
+                        {{-- <a href="/agent/{{\Illuminate\Support\Facades\Auth::user()->id}}" class="nav-link"> --}}
+                            <a href="/agent" class="nav-link">
                             <i class="nav-icon fas fa-industry"></i>
                             <p>
                                 Agents
