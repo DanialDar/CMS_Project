@@ -20,6 +20,8 @@ Route::get('/agents/create', 'AgentController@create');
 Route::post('/agent', 'AgentController@store');
 
 
+//routes for customer
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
