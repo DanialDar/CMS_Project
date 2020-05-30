@@ -22,6 +22,8 @@ Route::get('/agents/edit/{id}', 'AgentController@edit');
 Route::post('/agent/update/{id}', 'AgentController@update');
 Route::delete('/agent/{id}', 'AgentController@destroy');
 
+//routes for customer
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

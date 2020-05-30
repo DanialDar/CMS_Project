@@ -128,7 +128,7 @@
 
 @endif
 
-@if(\Illuminate\Support\Facades\Auth::user()->role_id == 2)
+@if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
     <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
@@ -137,7 +137,7 @@
                     <img src="admin-lte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p style="color:white">Lead Introducer</p>
+                    <p style="color:white">Agent</p>
                     <div class="" aria-labelledby="">
                         <a class="" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
@@ -170,23 +170,16 @@
                             </p>
                         </a>
                     </li>
+
                     <li class="nav-item has-treeview menu-open">
-                        {{-- <a href="/agent/{{\Illuminate\Support\Facades\Auth::user()->id}}" class="nav-link"> --}}
-                            <a href="/agent" class="nav-link">
-                            <i class="nav-icon fas fa-industry"></i>
-                            <p>
-                                Agents
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item has-treeview menu-open">
-                        <a href="/" class="nav-link">
+                        <a href="/customers" class="nav-link">
                             <i class="nav-icon fas fa-calculator"></i>
                             <p>
                                 Customers
                             </p>
                         </a>
                     </li>
+
                     <li class="nav-item has-treeview menu-open">
                         <a href="/" class="nav-link">
                             <i class="nav-icon fas fa-user"></i>

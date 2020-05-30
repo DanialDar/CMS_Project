@@ -26,6 +26,7 @@
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
+{{--    super admin starts--}}
 @if(\Illuminate\Support\Facades\Auth::user()->role_id == 1)
 {{--role id 1 for super admin--}}
     <!-- Small boxes (Stat box) -->
@@ -102,59 +103,22 @@
                 <table class="table table-condensed">
                   <tr>
                     <th>Introducer</th>
-                    <th>TL</th>
-                    <th>AGD</th>
-                    <th>Label</th>
-                    <th>Label</th>
-                    <th>Label</th>
-                    <th>Label</th>
-                  </tr>
-                  <tr  style="background-color:white">
-                    <td>RB</td>
-                    <td>20</td>
-                    <td>8</td>
-                    <td>300</td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td>12</td>
-                  </tr>
+                    <th>Person Name</th>
+                    <th>Perosn Phone</th>
+                    <th>Company Code</th>
+                      </tr>
+
+
+                    @isset($leads)
+                        @foreach($leads as $lead)
                   <tr style="background-color:white">
-                    <td>BG</td>
-                    <td>40</td>
-                    <td>8</td>
-                    <td>800</td>
-                    <td>30</td>
-                    <td>72</td>
-                    <td>72</td>
+                    <td>{{$lead->company_name}}</td>
+                    <td>{{$lead->contact_name}}</td>
+                    <td>{{$lead->contact_number}}</td>
+                    <td>{{$lead->company_code}}</td>
                   </tr>
-                  {{-- <tr>
-                    <td>3.</td>
-                    <td>Cron</td>
-                    <td>
-                      <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge bg-light-blue">30%</span></td>
-                  </tr> --}}
-                  <tr style="background-color:white">
-                    <td>XVZ</td>
-                    <td>20</td>
-                    <td>8</td>
-                    <td>300</td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td>12</td>
-                  </tr>
-                  <tr style="background-color:white">
-                    <td>GR</td>
-                    <td>20</td>
-                    <td>8</td>
-                    <td>300</td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td>12</td>
-                  </tr>
+                        @endforeach
+                   @endisset
                 </table>
               </div>
               <!-- /.box-body -->
@@ -173,59 +137,21 @@
                 <table class="table table-condensed">
                   <tr>
                     <th>Creditor</th>
-                    <th>TL</th>
-                    <th>AGD</th>
-                    <th>Label</th>
-                    <th>Label</th>
-                    <th>Label</th>
-                    <th>Label</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th>Address</th>
+
                   </tr>
-                  <tr  style="background-color:white">
-                    <td>RB</td>
-                    <td>20</td>
-                    <td>8</td>
-                    <td>300</td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td>12</td>
-                  </tr>
-                  <tr style="background-color:white">
-                    <td>BG</td>
-                    <td>40</td>
-                    <td>8</td>
-                    <td>800</td>
-                    <td>30</td>
-                    <td>72</td>
-                    <td>12</td>
-                  </tr>
-                  {{-- <tr>
-                    <td>3.</td>
-                    <td>Cron</td>
-                    <td>
-                      <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge bg-light-blue">30%</span></td>
-                  </tr> --}}
-                  <tr style="background-color:white">
-                    <td>XVZ</td>
-                    <td>20</td>
-                    <td>8</td>
-                    <td>300</td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td>12</td>
-                  </tr>
-                  <tr style="background-color:white">
-                    <td>GR</td>
-                    <td>20</td>
-                    <td>8</td>
-                    <td>300</td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td>12</td>
-                  </tr>
+                    @isset($creditors)
+                        @foreach($creditors as $creditor)
+                            <tr style="background-color:white">
+                                <td>{{$lead->name}}</td>
+                                <td>{{$lead->email}}</td>
+                                <td>{{$lead->contact_number}}</td>
+                                <td>{{$lead->postal_address}}</td>
+                            </tr>
+                        @endforeach
+                    @endisset
                 </table>
               </div>
               <!-- /.box-body -->
@@ -298,6 +224,9 @@
         </div>
       </div>
 @endif
+{{--  super admin end  --}}
+
+{{--    lead intruducer start--}}
 @if(\Illuminate\Support\Facades\Auth::user()->role_id == 2)
     <link rel="stylesheet" href="admin-lte/dist/css/adminlte.min.css">
 
@@ -384,5 +313,96 @@
     <!-- jQuery -->
 
 @endif
-{{--super admin--}}
+
+
+{{--Lead introducer end--}}
+
+{{--agent starts--}}
+    @if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
+        <link rel="stylesheet" href="admin-lte/dist/css/adminlte.min.css">
+
+        {{--role id 1 for super admin--}}
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>150</h3>
+                        <p>Customers</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>53<sup style="font-size: 20px"></sup></h3>
+                        <p>Reports</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <!-- ./col -->
+
+            <!-- ./col -->
+        </div>
+        <br>
+
+        <!-- Main content -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawVisualization);
+
+            function drawVisualization() {
+
+                var today = new Date();
+
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var date1 = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()-1);
+                var date2 = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()-2);
+                var date3 = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()-3);
+                var date4 = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()-4);
+                // Some raw data (not necessarily accurate)
+                var data = google.visualization.arrayToDataTable([
+                    ['This Week', 'Active', 'Pending', 'Incoming Leads', 'Successful Leads'],
+                    [date4 ,  165,          614.6,  165,          614.6],
+                    [date3 ,  135,          682,  165,          614.6],
+                    [date2,  157,           623,  165,          614.6],
+                    [ date1 ,  139,        609.4,  165,          614.6],
+                    [date,  136,           569.6,  165,          614.6]
+                ]);
+
+                var options = {
+                    title : 'Weekly report generated by system',
+                    vAxis: {title: 'No of Customers'},
+                    hAxis: {title: 'This week'},
+                    seriesType: 'bars',
+                    series: {4: {type: 'line'}}        };
+
+                var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="chart_div" style="width: 100%; height: 500px;"></div>
+
+
+
+
+
+        <!-- jQuery -->
+
+    @endif
+{{--    agent end--}}
 @endsection

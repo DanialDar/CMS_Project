@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\LeadIntroducer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -27,6 +29,9 @@ class HomeController extends Controller
     }
     public function dashboard()
     {
-        return view('dashboard');
+        $leads = DB::table('lead_introducers')->get();
+        $creditors = DB::table('creditors')->get();
+
+        return view('dashboard',compact('leads', 'creditors'));
     }
 }
