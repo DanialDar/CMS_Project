@@ -25,7 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $leads = DB::table('lead_introducers')->get();
+        $creditors = DB::table('creditors')->get();
+        return view('dashboard',compact('leads', 'creditors'));
     }
     public function dashboard()
     {

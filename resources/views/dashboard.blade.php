@@ -145,10 +145,10 @@
                     @isset($creditors)
                         @foreach($creditors as $creditor)
                             <tr style="background-color:white">
-                                <td>{{$lead->name}}</td>
-                                <td>{{$lead->email}}</td>
-                                <td>{{$lead->contact_number}}</td>
-                                <td>{{$lead->postal_address}}</td>
+                                <td>{{$creditor->name}}</td>
+                                <td>{{$creditor->email}}</td>
+                                <td>{{$creditor->contact_number}}</td>
+                                <td>{{$creditor->postal_address}}</td>
                             </tr>
                         @endforeach
                     @endisset
