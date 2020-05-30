@@ -13,7 +13,11 @@
 
 Route::get('/', 'HomeController@dashboard');
 
+//Routes for Agents
 
+Route::get('/agent/{id}', 'AgentController@index');
+Route::get('/agents/create', 'AgentController@create');
+Route::post('/agent', 'AgentController@store');
 
 
 Auth::routes();
