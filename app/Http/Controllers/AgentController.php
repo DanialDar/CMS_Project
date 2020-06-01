@@ -19,7 +19,7 @@ class AgentController extends Controller
     public function index()
     {
         $lead_introducer_id = Auth::user()->id;
-        $agents = DB::table('agents')->where('lead_introducer_id', $lead_introducer_id)->get();;
+        $agents = DB::table('agents')->where('lead_introducer_id', $lead_introducer_id)->get();
         return view('agent.index',compact(['agents']));
         //
     }
@@ -115,7 +115,7 @@ class AgentController extends Controller
             ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);
 
         // $agents = DB::table('agents')->where('lead_introducer_id', $agent->lead_introducer_id)->get();;
-        return redirect('/agent');
+        return redirect('/agents');
         // return redirect('/');
     }
 
@@ -132,6 +132,6 @@ class AgentController extends Controller
 
         DB::table('users')->where('agent_id', $agent->id)->delete();
 
-        return redirect('/agent');
+        return redirect('/agents');
     }
 }

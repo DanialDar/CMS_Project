@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/ionicons.min.css">
 <link rel="stylesheet" href="/css/_all-skin.min.css">
+<link rel="stylesheet" href="/css/bootstrap-datepicker.min.css">
 
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Theme style -->
@@ -25,6 +26,7 @@
   {{-- <link rel="stylesheet" href="{{ asset("node_modules/Ionicons/css/ionicons.min.css")}}"> --}}
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset("node_modules/datatables.net/css/dataTables.bootstrap.min.css")}}">
+  
 </head>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">

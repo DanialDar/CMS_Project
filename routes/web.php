@@ -54,7 +54,13 @@ Route::get('/super-agents/edit/{id}', 'SuperAgentsController@edit');
 Route::post('/super-agents/update/{id}', 'SuperAgentsController@update');
 Route::delete('/super-agent/{id}', 'SuperAgentsController@destroy');
 
+//Routes for Customers
 Route::get('/customers', 'CustomerController@index');
+Route::get('/customers/create', 'CustomerController@create');
+Route::post('/customer', 'CustomerController@store');
+Route::get('/customers/edit/{id}', 'CustomerController@edit');
+Route::post('/customers/update/{id}', 'CustomerController@update');
+Route::delete('/customer/{id}', 'CustomerController@destroy');
 
 Route::get('/reports', 'ReportsController@index');
 
