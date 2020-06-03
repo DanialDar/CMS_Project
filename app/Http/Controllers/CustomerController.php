@@ -125,6 +125,34 @@ class CustomerController extends Controller
         return redirect('/customers');
     }
 
+    public function updateforcustomer(Request $request, $id)
+    {
+        $customer = Customer::find($id);
+        $customer->title = $request->input("title");
+        $customer->name = $request->input("name");
+        $customer->email = $request->input("email");
+        $customer->contact_number = $request->input("contact_number");
+        $customer->marital_status = $request->input("marital_status");
+        $customer->birth_date = date('Y-m-d', strtotime($request->input("birth_date")));
+        $customer->postal_address = $request->input("postal_address");
+        $customer->city = $request->input("city");
+        $customer->country = $request->input("country");
+        $customer->current_status = "pending";
+
+        $customer->save();
+
+        $customer_id = $request->input("customer_id");
+// dd($customer_id);
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $role_id = 5;
+        $password = Hash::make($_POST['password']);
+        DB::table('users')
+            ->where('customer_id', $customer_id)
+            ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);
+
+        return redirect('/');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -140,4 +168,42 @@ class CustomerController extends Controller
 
         return redirect('/customers');
     }
+
+// for customers pool
+    public function display()
+    {
+        // $customers = DB::table('customers')->where('agent_id', $agent_id)->get();
+        $customers = DB::table('customers')->where('current_status', 'pending')->get();
+        return view('customerspool.index',compact(['customers']));
+    }
+    public function editpool($id)
+    {
+        $customer = Customer::find($id);
+        $loginUsers = DB::table('users')->where('customer_id', $customer->id)->get();
+        $creditors = Db::table('creditors')->get();
+        return view('customerspool.edit',compact(['customer', 'loginUsers','creditors']));
+    }
+    public function updateforcustomerpool(Request $request, $id)
+    {
+        $customer = Customer::find($id);
+
+        $customer->total_income = $request->input("total_income");
+        $customer->expenditure = $request->input("total_expenditure");
+        $customer->current_status ='processing';
+        $customer->creditor =$request->input("creditor");
+
+        $customer->save();
+
+        return redirect('/');
+    }
+
+
+    //for customers processed
+    public function process()
+    {
+        // $customers = DB::table('customers')->where('agent_id', $agent_id)->get();
+        $customers = DB::table('customers')->where('current_status', 'processing')->get();
+        return view('customersprocessed.index',compact(['customers']));
+    }
+
 }

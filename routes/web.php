@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
+
 Route::get('/', 'HomeController@dashboard');
 
 //Routes for Agents
@@ -62,6 +62,21 @@ Route::get('/customers/edit/{id}', 'CustomerController@edit');
 Route::post('/customers/update/{id}', 'CustomerController@update');
 Route::delete('/customer/{id}', 'CustomerController@destroy');
 
+Route::post('/customers/updateforcustomer/{id}', 'CustomerController@updateforcustomer');
+
 Route::get('/reports', 'ReportsController@index');
 
 Route::get('/payments', 'PaymentsController@index');
+
+//Customer POOL
+Route::get('/customerspool', 'CustomerController@display');
+Route::get('/customers/create', 'CustomerController@create');
+Route::post('/customer', 'CustomerController@store');
+Route::get('/customerspool/edit/{id}', 'CustomerController@editpool');
+Route::post('/customers/update/{id}', 'CustomerController@update');
+Route::delete('/customer/{id}', 'CustomerController@destroy');
+Route::post('/customerspool/updateforcustomerpool/{id}', 'CustomerController@updateforcustomerpool');
+
+
+//Customer Processed
+Route::get('/customersprocess', 'CustomerController@process');
