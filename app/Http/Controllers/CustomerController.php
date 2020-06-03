@@ -19,8 +19,8 @@ class CustomerController extends Controller
     public function index()
     {
         $agent_id = Auth::user()->id;
-        // $customers = DB::table('customers')->where('agent_id', $agent_id)->get();
-        $customers = DB::table('customers')->get();
+        $customers = DB::table('customers')->where('agent_id', $agent_id)->get();
+        // $customers = DB::table('customers')->get();
         return view('customers.index',compact(['customers']));
     }
 

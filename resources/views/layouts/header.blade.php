@@ -4,6 +4,14 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <title>Admin Management System</title>
+<link rel="stylesheet" href="css/mailbox/all.min.css">
+<link rel="stylesheet" href="css/mailbox/icheck-bootstrap.min.css">
+<link rel="stylesheet" href="css/mailbox/adminlte.min.css">
+<link rel="stylesheet" href="css/mailbox/ioicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<link rel="stylesheet" href="css/mailbox/summernote-bs4.css">
+
+
 <link rel="stylesheet" href="/css/app.css">
 <link rel="stylesheet" href="/css/AdminLte.min.css">
 <link rel="stylesheet" href="/css/AdminLte.css">
@@ -26,7 +34,7 @@
   {{-- <link rel="stylesheet" href="{{ asset("node_modules/Ionicons/css/ionicons.min.css")}}"> --}}
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset("node_modules/datatables.net/css/dataTables.bootstrap.min.css")}}">
-  
+  <link rel="stylesheet" href="/css/blue.css">
 </head>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
