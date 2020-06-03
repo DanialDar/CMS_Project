@@ -109,7 +109,7 @@ class AgentController extends Controller
         $name = $_POST['name'];
         $email = $_POST['email'];
         $role_id = 4;
-        $password = $_POST['password'];
+        $password = Hash::make($_POST['password']);
         DB::table('users')
             ->where('agent_id', $agent_id)
             ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);

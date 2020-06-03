@@ -104,7 +104,7 @@ class SuperAgentsController extends Controller
         $name = $_POST['name'];
         $email = $_POST['email'];
         $role_id = 3;
-        $password = $_POST['password'];
+        $password = Hash::make($_POST['password']);
         DB::table('users')
             ->where('super_agent_id', $super_agent_id)
             ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);

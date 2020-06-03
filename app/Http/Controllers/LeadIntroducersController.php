@@ -102,7 +102,7 @@ class LeadIntroducersController extends Controller
         $name = $_POST['company_name'];
         $email = $_POST['contact_email'];
         $role_id = 2;
-        $password = $_POST['contact_password'];
+        $password =Hash::make($_POST['contact_password']);
         DB::table('users')
             ->where('company_id', $company_id)
             ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);

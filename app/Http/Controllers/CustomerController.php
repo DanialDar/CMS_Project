@@ -55,11 +55,9 @@ class CustomerController extends Controller
         $current_status = "pending";
         $agent_id = Auth::user()->id;
 
-
         DB::insert('insert into customers (title,name,email,contact_number,marital_status,birth_date,postal_address,city,country,agent_id,current_status) values(?,?,?,?,?,?,?,?,?,?,?)',[$title,$name,$email,$contact_number,$marital_status,$birth_date,$postal_address,$city,$country,$agent_id,$current_status]);
 
         $id = DB::getPdo()->lastInsertId();
-
 
         $role_id = 5;
         $password = Hash::make($_POST['password']);
@@ -119,7 +117,7 @@ class CustomerController extends Controller
         $name = $_POST['name'];
         $email = $_POST['email'];
         $role_id = 5;
-        $password = $_POST['password'];
+        $password = Hash::make($_POST['password']);
         DB::table('users')
             ->where('customer_id', $customer_id)
             ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);
