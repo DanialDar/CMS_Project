@@ -23,7 +23,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="/sent" class="nav-link">
                     <i class="far fa-envelope"></i> Sent
                   </a>
                 </li>
@@ -135,7 +135,7 @@
                     </td>
                     <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
                     <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to this problem...
+                    <td class="mailbox-subject">AdminLTE 3.0 Issue - Trying to find a solution to this problem...
                     </td>
                     <td class="mailbox-attachment"></td>
                     <td class="mailbox-date">5 mins ago</td>
@@ -372,7 +372,7 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-    
+
 <!-- jQuery -->
 <script src="js/mailbox/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

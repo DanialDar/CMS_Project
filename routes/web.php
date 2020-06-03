@@ -83,4 +83,6 @@ Route::get('/customersprocess', 'CustomerController@process');
 
 //Routes For MailBox
 Route::get('/inbox', 'MailBoxController@index');
+Route::get('/sent', 'MailBoxController@sent');
 Route::get('/compose', 'MailBoxController@create');
+Route::post('/compose', 'MailBoxController@store');
