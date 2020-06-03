@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
+use App\Model\Inbox;
 class MailBoxController extends Controller
 {
     /**
@@ -39,8 +43,35 @@ class MailBoxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $toUserMail = $_POST['toUserMail'];
+
+        $messages = DB::table('users')->where('email', $toUserMail)->get();
+        if(count($messages) > 0){
+            $subject = $_POST['subject'];
+            $body = $_POST['body'];
+            $fromUserId = Auth::user()->id;
+            $isRead = 0;
+            $isReceived = 0;
+            $isReceived = 0;
+            $isSent = 1;
+            $isStar = 0;
+            $isDeleteSender = 0;
+            $isDeleteReceiver = 0;
+
+
+
+            DB::insert('insert into inbox (fromUserId,toUserMail,subject,body,isRead,isReceived,isSent,isStar,isDeleteSender,isDeleteReceiver) values(?,?,?,?,?,?,?,?,?,?)',[$fromUserId,$toUserMail,$subject,$body,$isRead,$isReceived,$isSent,$isStar,$isDeleteSender,$isDeleteReceiver]);
+
+            session()->flash('success', 'Mail Sent Successfully');
+            return redirect()->back();
+
+        }else {
+            session()->flash('msg', 'User not found');
+            return redirect()->back();
+        }
+
     }
+
 
     /**
      * Display the specified resource.
@@ -76,6 +107,13 @@ class MailBoxController extends Controller
         //
     }
 
+    public function sent()
+    {
+        $user_id = Auth::user()->id;
+        $messages = DB::table('inbox')->where('fromUserId', $user_id)->get();
+
+        return view('mailbox.sent',compact('messages'));
+    }
     /**
      * Remove the specified resource from storage.
      *

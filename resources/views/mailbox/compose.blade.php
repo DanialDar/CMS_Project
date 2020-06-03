@@ -1,8 +1,23 @@
 @extends('layouts.master')
 
-@section('content')    
-      <div class="container-fluid">
-        <div class="row">
+@section('content')
+
+    @if(Session::has('msg'))
+    <div class="alert alert-danger" role="alert">
+        {!! Session::has('msg') ? Session::get("msg") : '' !!}
+
+
+    </div>@endif
+    @if(Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {!! Session::has('success') ? Session::get("success") : '' !!}
+
+
+        </div>@endif
+    <div class="container-fluid">
+
+
+          <div class="row">
           <div class="col-md-3">
             <a href="/inbox" class="btn btn-primary btn-block mb-3">Back to Inbox</a>
 
@@ -18,13 +33,13 @@
               <div class="card-body p-0">
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
-                    <a href="#" class="nav-link">
+                    <a href="/inbox" class="nav-link">
                       <i class="fas fa-inbox"></i> Inbox
                       <span class="badge bg-primary float-right">12</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/sent" class="nav-link">
                       <i class="far fa-envelope"></i> Sent
                     </a>
                   </li>
@@ -78,6 +93,8 @@
           </div>
           <!-- /.col -->
           <div class="col-md-9">
+              <form method="POST" action="/compose" enctype="multipart/form-data" class="form-horizontal">
+                  @csrf
             <div class="card card-primary card-outline">
               <div class="card-header">
                 <h3 class="card-title">Compose New Message</h3>
@@ -85,36 +102,14 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="form-group">
-                  <input class="form-control" placeholder="To:">
+                  <input class="form-control" id="toUserMail" name="toUserMail" placeholder="To:">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Subject:">
+                  <input class="form-control" id="subject" name="subject"  placeholder="Subject:">
                 </div>
                 <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px">
-                      <h1><u>Heading Of Message</u></h1>
-                      <h4>Subheading</h4>
-                      <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
-                        was born and I will give you a complete account of the system, and expound the actual teachings
-                        of the great explorer of the truth, the master-builder of human happiness. No one rejects,
-                        dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know
-                        how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again
-                        is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain,
-                        but because occasionally circumstances occur in which toil and pain can procure him some great
-                        pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise,
-                        except to obtain some advantage from it? But who has any right to find fault with a man who
-                        chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that
-                        produces no resultant pleasure? On the other hand, we denounce with righteous indignation and
-                        dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so
-                        blinded by desire, that they cannot foresee</p>
-                      <ul>
-                        <li>List item one</li>
-                        <li>List item two</li>
-                        <li>List item three</li>
-                        <li>List item four</li>
-                      </ul>
-                      <p>Thank you,</p>
-                      <p>John Doe</p>
+                    <textarea id="compose-textarea" id="body" name="body" class="form-control" style="height: 300px">
+
                     </textarea>
                 </div>
                 <div class="form-group">
@@ -135,6 +130,7 @@
               </div>
               <!-- /.card-footer -->
             </div>
+              </form>
             <!-- /.card -->
           </div>
           <!-- /.col -->
