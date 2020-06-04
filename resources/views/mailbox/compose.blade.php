@@ -115,7 +115,7 @@
                 <div class="form-group">
                   <div class="btn btn-default btn-file">
                     <i class="fas fa-paperclip"></i> Attachment
-                    <input type="file" name="attachment">
+                      <input  name="files[]" type="file" multiple>
                   </div>
                   <p class="help-block">Max. 32MB</p>
                 </div>
