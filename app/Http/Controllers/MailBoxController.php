@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,20 @@ class MailBoxController extends Controller
      */
     public function index()
     {
-        return view('mailbox.inbox');
+        $user_id = Auth::user()->id;
+        $user_data = User::find($user_id);
+//            DB::table('users')->find($user_id)->get();
+
+        $messages = DB::table('inbox')->where('toUserMail', $user_data->email)->get();
+       $senders = array();
+        foreach ($messages as $message){
+
+        $senders = User::find($message->fromUserId)->get();
+//            DB::table('users')->find($message->fromUserId)->get();
+
+       }
+
+        return view('mailbox.inbox',compact('messages', 'senders'));
     }
 
     /**
