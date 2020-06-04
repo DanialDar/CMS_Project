@@ -8,7 +8,7 @@ class Inbox extends Model
 {
     protected $table = "inbox";
     protected $fillable = [
-        'fromUserId','toUserMail','subject','body','isRead','isReceived','isSent','isStar','isDeleteSender','isDeleteReceiver'
+        'fromUserId','toUserMail','subject','body','isRead','isReceived','isSent','isStar','isDeleteSender','isDeleteReceiver','isAttachment'
     ];
 
     //

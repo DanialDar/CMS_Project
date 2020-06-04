@@ -95,6 +95,14 @@ class MailBoxController extends Controller
      */
     public function show($id)
     {
+
+        $message = Inbox::find($id);
+
+        $sender = User::find($message->fromUserId);
+
+        return view('mailbox.read',compact('message','sender'));
+
+
         //
     }
 

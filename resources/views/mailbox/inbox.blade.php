@@ -137,7 +137,7 @@
                     <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
                       @foreach($senders as $sender)
                 @if($message->fromUserId == $sender->id)
-                      <td class="mailbox-name"><a href="read-mail.html">{{$sender->email}}</a></td>
+                      <td class="mailbox-name"><a href="/read/{{$message->id}}">{{$sender->email}}</a></td>
                     @endif
                               @endforeach
                       <td class="mailbox-subject"><b>{{$message->subject}}</b> {{$message->body}} ...
