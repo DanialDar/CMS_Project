@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Attachments;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +19,20 @@ class MailBoxController extends Controller
      */
     public function index()
     {
-        return view('mailbox.inbox');
+        $user_id = Auth::user()->id;
+        $user_data = User::find($user_id);
+//            DB::table('users')->find($user_id)->get();
+
+        $messages = DB::table('inbox')->where('toUserMail', $user_data->email)->get();
+       $senders = array();
+        foreach ($messages as $message){
+
+        $senders = User::find($message->fromUserId)->get();
+//            DB::table('users')->find($message->fromUserId)->get();
+
+       }
+
+        return view('mailbox.inbox',compact('messages', 'senders'));
     }
 
     /**
@@ -57,12 +72,36 @@ class MailBoxController extends Controller
             $isStar = 0;
             $isDeleteSender = 0;
             $isDeleteReceiver = 0;
-
-
-
             DB::insert('insert into inbox (fromUserId,toUserMail,subject,body,isRead,isReceived,isSent,isStar,isDeleteSender,isDeleteReceiver) values(?,?,?,?,?,?,?,?,?,?)',[$fromUserId,$toUserMail,$subject,$body,$isRead,$isReceived,$isSent,$isStar,$isDeleteSender,$isDeleteReceiver]);
 
-            session()->flash('success', 'Mail Sent Successfully');
+            $id = DB::getPdo()->lastInsertId();
+//                $file = $request->file;
+//                $filename = $file->getClientOriginalName();
+////
+////             echo $namefile;
+//                $filename = $file->storeAs('files', $filename);
+//                Attachments::create([
+//                    'inbox_id' => $id,
+//                    'filename' => $filename
+//                ]);
+
+            $files = $request->file('files');
+
+            if($request->hasFile('files'))
+            {
+                foreach ($files as $file) {
+                    $name=$file->getClientOriginalName();
+//               echo $name;
+
+                  $filename =   $file->move(storage_path().'/app/files/', $name );
+                                    Attachments::create([
+                    'inbox_id' => $id,
+                    'filename' => $filename
+                ]);
+                }
+            }
+
+        session()->flash('success', 'Mail Sent Successfully');
             return redirect()->back();
 
         }else {
@@ -81,6 +120,14 @@ class MailBoxController extends Controller
      */
     public function show($id)
     {
+
+        $message = Inbox::find($id);
+
+        $sender = User::find($message->fromUserId);
+
+        return view('mailbox.read',compact('message','sender'));
+
+
         //
     }
 
