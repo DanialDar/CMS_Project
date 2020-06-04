@@ -90,11 +90,22 @@ class LeadIntroducersController extends Controller
     public function update(Request $request, $id)
     {
         $company = LeadIntroducer::find($id);
+        $pass = DB::table('users')->where('company_id', $company->id)->pluck('password');
+
         $company->company_name = $request->input("company_name");
         $company->address = $request->input("address");
         $company->contact_name = $request->input("contact_name");
         $company->contact_number = $request->input("contact_number");
         $company->company_code = $request->input("company_code");
+
+        if($pass[0] == $request->input("contact_password")){
+            $password = $request->input("contact_password");
+        }
+        elseif($pass[0] != $request->input("contact_password")){
+            $password = Hash::make($request->input("contact_password"));
+        }
+     
+     
         $company->save();
 
         $company_id = $request->input("company_id");
@@ -102,7 +113,6 @@ class LeadIntroducersController extends Controller
         $name = $_POST['company_name'];
         $email = $_POST['contact_email'];
         $role_id = 2;
-        $password =Hash::make($_POST['contact_password']);
         DB::table('users')
             ->where('company_id', $company_id)
             ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);

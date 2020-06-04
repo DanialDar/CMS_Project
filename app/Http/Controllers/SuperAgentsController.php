@@ -91,10 +91,20 @@ class SuperAgentsController extends Controller
     public function update(Request $request, $id)
     {
         $s_agent = SuperAgent::find($id);
+        $pass = DB::table('users')->where('super_agent_id', $s_agent->id)->pluck('password');
+
         $s_agent->name = $request->input("name");
         $s_agent->email = $request->input("email");
         $s_agent->contact = $request->input("contact");
         $s_agent->designation = $request->input("designation");
+
+        if($pass[0] == $request->input("password")){
+            $password = $request->input("password");
+        }
+        elseif($pass[0] != $request->input("password")){
+            $password = Hash::make($request->input("password"));
+        }
+
         $s_agent->save();
 
         $super_agent_id = $request->input("super_agent_id");
@@ -104,7 +114,6 @@ class SuperAgentsController extends Controller
         $name = $_POST['name'];
         $email = $_POST['email'];
         $role_id = 3;
-        $password = Hash::make($_POST['password']);
         DB::table('users')
             ->where('super_agent_id', $super_agent_id)
             ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);

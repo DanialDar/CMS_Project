@@ -99,6 +99,8 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $customer = Customer::find($id);
+        $pass = DB::table('users')->where('customer_id', $customer->id)->pluck('password');
+
         $customer->title = $request->input("title");
         $customer->name = $request->input("name");
         $customer->email = $request->input("email");
@@ -110,14 +112,20 @@ class CustomerController extends Controller
         $customer->country = $request->input("country");
         $customer->current_status = "pending";
         $customer->agent_id = Auth::user()->id;
+
+        if($pass[0] == $request->input("password")){
+            $password = $request->input("password");
+        }
+        elseif($pass[0] != $request->input("password")){
+            $password = Hash::make($request->input("password"));
+        }
+
         $customer->save();
 
         $customer_id = $request->input("customer_id");
-// dd($customer_id);
         $name = $_POST['name'];
         $email = $_POST['email'];
         $role_id = 5;
-        $password = Hash::make($_POST['password']);
         DB::table('users')
             ->where('customer_id', $customer_id)
             ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);
