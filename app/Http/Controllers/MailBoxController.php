@@ -44,6 +44,11 @@ class MailBoxController extends Controller
         return view('mailbox.compose');
     }
 
+    public function show1()
+    {
+        return view('mailbox.read');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
