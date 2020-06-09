@@ -142,7 +142,12 @@
                               @endforeach
                       <td class="mailbox-subject"><b>{{$message->subject}}</b> {{$message->body}} ...
                     </td>
-                    <td class="mailbox-attachment"></td>
+@if($message->isAttachment==1)
+                    <td class="mailbox-attachment"><a href="#"><i class="fas fa-paperclip"></i></a></td>
+@endif
+                      @if($message->isAttachment==0)
+                          <td class="mailbox-attachment"></td>
+                      @endif
                     <td class="mailbox-date">{{$message->created_at}}</td>
                   </tr>
                 @endforeach
