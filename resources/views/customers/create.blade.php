@@ -46,11 +46,11 @@
         <form method="POST" action="/customer" enctype="multipart/form-data" class="form-horizontal">
           @csrf
           <div class="box-body">
-            
-            
+
+
             <div id="basic_detail" class="tabcontent">
-            
-            
+
+
             <div class="row">
                 <div class="col-md-3">
                     <label for="title" class="control-label" style="padding-left:50px">Title</label>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <br>
-    
+
             <div class="row">
                 <div class="col-md-3">
                     <label for="email" class="control-label" style="padding-left:50px">Login Email</label>
@@ -128,7 +128,7 @@
                             <div class="col-md-6">
                                 <label for="house" class="control-label">House#</label>
                             </div>
-                            <div class="col-md-6" style="max-width: 100%">    
+                            <div class="col-md-6" style="max-width: 100%">
                                 <input type="text" class="form-control" name="house" id="house">
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                             <div class="col-md-6">
                                 <label for="street" class="control-label">street#</label>
                             </div>
-                            <div class="col-md-6" style="max-width: 100%">    
+                            <div class="col-md-6" style="max-width: 100%">
                                 <input type="text" class="form-control" name="street" id="street">
                             </div>
                         </div>
@@ -144,17 +144,17 @@
                             <div class="col-md-4">
                                 <label for="area" class="control-label">Area</label>
                             </div>
-                            <div class="col-md-8"  style="max-width: 100%">    
+                            <div class="col-md-8"  style="max-width: 100%">
                                 <input type="text" class="form-control" name="area" id="area">
                             </div>
                         </div>
                     </div>
-                    <div class="row">    
+                    <div class="row">
                         <div class="col-md-3">
                             <div class="col-md-6">
                                 <label for="city" class="control-label">City</label>
                             </div>
-                            <div class="col-md-6" style="max-width: 100%">    
+                            <div class="col-md-6" style="max-width: 100%">
                                 <input type="text" class="form-control" name="city" id="city">
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                             <div class="col-md-6">
                                 <label for="country" class="control-label">Country</label>
                             </div>
-                            <div class="col-md-6" style="max-width: 100%">    
+                            <div class="col-md-6" style="max-width: 100%">
                                 <input type="text" class="form-control" name="country" id="country">
                             </div>
                         </div>
@@ -170,14 +170,14 @@
                             <div class="col-md-4"  style="max-width: 100%">
                                 <label for="postal_address" class="control-label">Postal Address</label>
                             </div>
-                            <div class="col-md-8"  style="max-width: 100%">    
+                            <div class="col-md-8"  style="max-width: 100%">
                                 <textarea class="form-control" name="postal_address" id="postal_address"></textarea>
                             </div>
                         </div>
-                    </div>    
-                </div>    
+                    </div>
+                </div>
             </div>
-            
+
             {{-- <div class="row">
                 <div class="col-md-3">
                     <label for="city" class="control-label" style="padding-left:50px">City</label>
@@ -195,7 +195,7 @@
                     <input type="text" class="form-control" name="country" id="country" placeholder="Enter Customer's Country">
                 </div>
             </div> --}}
-    
+
             <br>
             </div>
             <div id="creditor_info" class="tabcontent">
@@ -238,7 +238,7 @@
                     <div class="col-md-8">
                         <input type="text" class="form-control" name="payment_method" id="payment_method" placeholder="Select Customer's Payment Method">
                     </div>
-                </div> 
+                </div>
             </div>
             <div id="income" class="tabcontent">
                 <div class="row">
@@ -285,7 +285,7 @@
                         <input type="text" class="form-control" name="income_day" id="income_day" placeholder="Enter Your Income Day">
                     </div>
                 </div>
-                <br> 
+                <br>
             </div>
             <div id="expenditure" class="tabcontent">
                 <div class="row">
@@ -337,8 +337,85 @@
             <div id="summary" class="tabcontent">
                 <h3>About</h3>
                 <p>Who we are and what we do.</p>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Schedule Of Payments</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+                                                    <thead>
+                                                    <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Status</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Amount</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Overtime</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Additional</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Total</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Paid</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Paid Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Fees</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Org. Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Pay Method</th></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr role="row" class="odd">
+                                                        <td class="sorting_1 dtr-control">0</td>
+                                                        <td>6/9/20</td>
+                                                        <td>10000</td>
+                                                        <td>1.7</td>
+                                                        <td>A</td>
+                                                        <td class="sorting_1 dtr-control">17000</td>
+                                                        <td>Paid</td>
+                                                        <td>6/9/20</td>
+                                                        <td>1.7</td>
+                                                        <td>A</td>
+                                                        <td>A</td>
+                                                    </tr><tr role="row" class="even">
+                                                        <td class="sorting_1 dtr-control">0</td>
+                                                        <td>6/9/20</td>
+                                                        <td>10000</td>
+                                                        <td>1.7</td>
+                                                        <td>A</td>
+                                                        <td class="sorting_1 dtr-control">17000</td>
+                                                        <td>Paid</td>
+                                                        <td>6/9/20</td>
+                                                        <td>1.7</td>
+                                                        <td>A</td>
+                                                        <td>A</td></tr><tr role="row" class="odd">
+                                                        <td class="sorting_1 dtr-control">0</td>
+                                                        <td>6/9/20</td>
+                                                        <td>10000</td>
+                                                        <td>1.7</td>
+                                                        <td>A</td>
+                                                        <td class="sorting_1 dtr-control">17000</td>
+                                                        <td>Paid</td>
+                                                        <td>6/9/20</td>
+                                                        <td>1.7</td>
+                                                        <td>A</td>
+                                                        <td>A</td></tr><tr role="row" class="even">
+                                                        <td class="sorting_1 dtr-control">0</td>
+                                                        <td>6/9/20</td>
+                                                        <td>10000</td>
+                                                        <td>1.7</td>
+                                                        <td>A</td>
+                                                        <td class="sorting_1 dtr-control">17000</td>
+                                                        <td>Paid</td>
+                                                        <td>6/9/20</td>
+                                                        <td>1.7</td>
+                                                        <td>A</td>
+                                                        <td>A</td>   </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                    <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Status</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Amount</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Overtime</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Additional</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Total</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Paid</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Paid Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Fees</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Org. Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Pay Method</th></tr>
+                                                    </tfoot>
+                                                </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+
+
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </section>
             </div>
-          
+
         </div>
           <!-- /.box-body -->
           <div class="box-footer">
@@ -346,7 +423,7 @@
                 <a href="/agent" style="color:white">Cancel</a>
             </button>
             <button type="submit" class="btn btn-success">Create</button>
-    
+
           </div>
           <!-- /.box-footer -->
         </form>
@@ -499,7 +576,7 @@ document.getElementById("defaultOpen").click();
     $('#datepicker').datepicker({
       autoclose: true
     })
-</script>     
+</script>
 {{-- <!-- FastClick -->
 <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
