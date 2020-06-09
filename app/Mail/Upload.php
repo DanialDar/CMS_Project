@@ -30,22 +30,23 @@ class Upload extends Mailable
      */
     public function build()
     {
-//        return $this->view('email/upload')
-//            ->subject('Document Upload')
-//            ->attach($this->data['document']->getRealPath(),
-//                [
-//                    'as' => $this->data['document']->getClientOriginalName(),
-//                    'mime' => $this->data['document']->getClientMimeType(),
-//                ]);
+        return $this->view('email/upload')
+            ->subject('Document Upload')
+
+            ->attach($this->data['document']->getRealPath(),
+                [
+                    'as' => $this->data['document']->getClientOriginalName(),
+                    'mime' => $this->data['document']->getClientMimeType(),
+                ]);
 
 
-        $email = $this->view('email.upload')->subject('ATTACHEMENTS');
-
-        $attachments = $this->data['document'];
-        // $attachments is an array with file paths of attachments
-        foreach($attachments as $filePath){
-            $email->attach($filePath);
-        }
-        return $email;
+//        $email = $this->view('email.upload')->subject('ATTACHEMENTS');
+//
+//        $attachments = $this->data['document'];
+//        // $attachments is an array with file paths of attachments
+//        foreach($attachments as $filePath){
+//            $email->attach($filePath);
+//        }
+//        return $email;
     }
 }
