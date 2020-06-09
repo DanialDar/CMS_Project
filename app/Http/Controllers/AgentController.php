@@ -59,6 +59,13 @@ class AgentController extends Controller
         $password = Hash::make($_POST['password']);
         DB::insert('insert into users (name,email,role_id,password,agent_id) values(?,?,?,?,?)',[$agent_name,$email,$role_id,$password,$id]);
 
+        
+        $user_id = DB::getPdo()->lastInsertId();
+        $created_by = $lead_id;
+        $action = "created";
+        DB::insert('insert into logs (user_id,action,created_by) values(?,?,?)',[$user_id,$action,$created_by]);
+
+
         return redirect('/agent');
         //
     }
