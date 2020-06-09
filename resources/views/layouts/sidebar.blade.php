@@ -96,6 +96,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item has-treeview menu-open">
+                    <a href="/logs" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                           Logs
+                        </p>
+                    </a>
+                </li>
             </ul>
             <ul class="nav nav-treeview">
 {{--                        <li class="nav-item">--}}

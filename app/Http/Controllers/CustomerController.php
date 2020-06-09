@@ -31,8 +31,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-
-        return view('customers.create');
+        $creditors = Db::table('creditors')->get();
+        return view('customers.create',compact(['creditors']));
     }
 
     /**

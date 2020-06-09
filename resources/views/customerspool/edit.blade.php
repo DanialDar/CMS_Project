@@ -120,7 +120,7 @@
           <br>
           <div class="row">
               <div class="col-md-3">
-                  <label for="marital_status" class="control-label" style="padding-left:50px">Creditor </label>
+                  <label for="creditor" class="control-label" style="padding-left:50px">Creditor </label>
               </div>
               <div class="col-md-8">
                   <select class="form-control"  name="creditor" id="creditor">

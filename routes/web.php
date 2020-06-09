@@ -87,3 +87,6 @@ Route::get('/read/{id}', 'MailBoxController@show');
 Route::get('/sent', 'MailBoxController@sent');
 Route::get('/compose', 'MailBoxController@create');
 Route::post('/compose', 'MailBoxController@store');
+
+//Routes For Logs
+Route::get('/logs', 'LogsController@index');
