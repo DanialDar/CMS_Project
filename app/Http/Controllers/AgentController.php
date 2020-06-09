@@ -96,12 +96,21 @@ class AgentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $agent = Agent::find($id);
-        // dd($request->input("name"));
+        $agent = Agent::find($id);        
+        $pass = DB::table('users')->where('agent_id', $agent->id)->pluck('password');
+
         $agent->name = $request->input("name");
         $agent->email = $request->input("email");
         $agent->contact_number = $request->input("contact_number");
         $agent->lead_introducer_id = Auth::user()->id;
+
+        if($pass[0] == $request->input("password")){
+            $password = $request->input("password");
+        }
+        elseif($pass[0] != $request->input("password")){
+            $password = Hash::make($request->input("password"));
+        }
+
         $agent->save();
 
         $agent_id = $request->input("agent_id");
@@ -109,14 +118,11 @@ class AgentController extends Controller
         $name = $_POST['name'];
         $email = $_POST['email'];
         $role_id = 4;
-        $password = Hash::make($_POST['password']);
         DB::table('users')
             ->where('agent_id', $agent_id)
             ->update(['name' => $name, 'email' => $email, 'role_id' => $role_id, 'password' => $password ]);
 
-        // $agents = DB::table('agents')->where('lead_introducer_id', $agent->lead_introducer_id)->get();;
-        return redirect('/agents');
-        // return redirect('/');
+        return redirect('/agent');
     }
 
     /**
