@@ -112,6 +112,10 @@
 
                     </textarea>
                 </div>
+                  <div class="form-group col-md-4">
+                      <label for="document">Document:</label>
+                      <input type="file" class="form-control" name="document">
+                  </div>
                 <div class="form-group">
                   <div class="btn btn-default btn-file">
                     <i class="fas fa-paperclip"></i> Attachment

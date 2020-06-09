@@ -24,15 +24,26 @@ class MailBoxController extends Controller
 //            DB::table('users')->find($user_id)->get();
 
         $messages = DB::table('inbox')->where('toUserMail', $user_data->email)->get();
-       $senders = array();
+        $senders = array();
         foreach ($messages as $message){
 
         $senders = User::find($message->fromUserId)->get();
 //            DB::table('users')->find($message->fromUserId)->get();
 
        }
+        $files = array();
+        foreach ($messages as $message){
 
-        return view('mailbox.inbox',compact('messages', 'senders'));
+            if($message->isAttachment == 1){
+                $files = DB::table('attachments')->where('inbox_id',$message->id)->get();
+
+            }
+//            $senders = User::find($message->fromUserId)->get();
+//            DB::table('users')->find($message->fromUserId)->get();
+
+        }
+
+        return view('mailbox.inbox',compact('messages', 'senders','files'));
     }
 
     /**
@@ -72,9 +83,9 @@ class MailBoxController extends Controller
             $isStar = 0;
             $isDeleteSender = 0;
             $isDeleteReceiver = 0;
-            DB::insert('insert into inbox (fromUserId,toUserMail,subject,body,isRead,isReceived,isSent,isStar,isDeleteSender,isDeleteReceiver) values(?,?,?,?,?,?,?,?,?,?)',[$fromUserId,$toUserMail,$subject,$body,$isRead,$isReceived,$isSent,$isStar,$isDeleteSender,$isDeleteReceiver]);
+            $isAttachment = 0;
 
-            $id = DB::getPdo()->lastInsertId();
+
 //                $file = $request->file;
 //                $filename = $file->getClientOriginalName();
 ////
@@ -88,7 +99,10 @@ class MailBoxController extends Controller
             $files = $request->file('files');
 
             if($request->hasFile('files'))
-            {
+            { $isAttachment = 1;
+                DB::insert('insert into inbox (fromUserId,toUserMail,subject,body,isRead,isReceived,isSent,isStar,isDeleteSender,isDeleteReceiver,isAttachment) values(?,?,?,?,?,?,?,?,?,?,?)',[$fromUserId,$toUserMail,$subject,$body,$isRead,$isReceived,$isSent,$isStar,$isDeleteSender,$isDeleteReceiver, $isAttachment]);
+                $id = DB::getPdo()->lastInsertId();
+
                 foreach ($files as $file) {
                     $name=$file->getClientOriginalName();
 //               echo $name;
@@ -99,7 +113,20 @@ class MailBoxController extends Controller
                     'filename' => $filename
                 ]);
                 }
+
+            }else{
+                DB::insert('insert into inbox (fromUserId,toUserMail,subject,body,isRead,isReceived,isSent,isStar,isDeleteSender,isDeleteReceiver,isAttachment) values(?,?,?,?,?,?,?,?,?,?,?)',[$fromUserId,$toUserMail,$subject,$body,$isRead,$isReceived,$isSent,$isStar,$isDeleteSender,$isDeleteReceiver, $isAttachment]);
+                $id = DB::getPdo()->lastInsertId();
+
             }
+            // send the email
+            $document = $request->file('document');
+            $to_email = $toUserMail;
+            $data = [
+                'document' => $document
+            ];
+    \Mail::to($to_email)->send(new \App\Mail\Upload($data));
+
 
         session()->flash('success', 'Mail Sent Successfully');
             return redirect()->back();
@@ -125,7 +152,16 @@ class MailBoxController extends Controller
 
         $sender = User::find($message->fromUserId);
 
-        return view('mailbox.read',compact('message','sender'));
+        $files = array();
+
+
+            if($message->isAttachment == 1){
+
+                $files = DB::table('attachments')->where('inbox_id',$message->id)->get();
+
+            }
+
+        return view('mailbox.read',compact('message','sender','files'));
 
 
         //
