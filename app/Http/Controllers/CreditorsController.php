@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Creditor;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CreditorsController extends Controller
 {
@@ -85,6 +86,17 @@ class CreditorsController extends Controller
         $creditor->postal_address = $request->input("postal_address");
         $creditor->contact_number = $request->input("contact_number");
         $creditor->save();
+        // dd($creditor->getChanges());
+
+        $changes_array = $creditor->getChanges();
+        $changes = serialize($changes_array);
+        $performed_by = Auth::user()->name;
+        $performer_role = "Super Admin";
+        $performed_on = $request->input("name");
+        $performed_on_role = "Creditor";
+        $action = "Updates";
+
+        DB::insert('insert into logs ( performed_by,performer_role,performed_on,performed_on_role,action,changes) values(?,?,?,?,?,?)',[$performed_by,$performer_role,$performed_on,$performed_on_role,$action,$changes]);
         return redirect('/creditors');
     }
 

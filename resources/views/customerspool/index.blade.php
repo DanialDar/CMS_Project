@@ -43,7 +43,7 @@
             @endif
             <td>
 
-                <a style="margin-right:20px" href="/customerspool/edit/{{$customer->id}}"><i class="nav-icon fas fa-plus"></i> Add Info</a>
+                <a style="margin-right:20px" href="/customers/edit/{{$customer->id}}"><i class="nav-icon fas fa-plus"></i> Add Info</a>
 
                 {{--            <a style="margin-right:20px" href="/customers/edit/{{$customer->id}}"><i class="nav-icon fas fa-edit"></i></a>--}}
 {{--          --}}

@@ -43,7 +43,14 @@
             <button class="tablink" onclick="openPage('expenditure', this, 'grey')">Expenditure</button>
             <button class="tablink" onclick="openPage('summary', this, 'grey')">Summary</button>
         <!-- form start -->
-        <form method="POST" action="/customer" enctype="multipart/form-data" class="form-horizontal">
+        {{-- <form method="POST" action="/customer" enctype="multipart/form-data" class="form-horizontal">
+          @csrf --}}
+          @if(\Illuminate\Support\Facades\Auth::user()->role_id == 5)
+              <form method="POST" action="/customers/updateforcustomer/{{$customer->id}}" enctype="multipart/form-data" class="form-horizontal">
+          @endif
+          @if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
+            <form method="POST" action="/customers/update/{{$customer->id}}" enctype="multipart/form-data" class="form-horizontal">
+          @endif
           @csrf
           <div class="box-body">
 
@@ -56,7 +63,7 @@
                     <label for="title" class="control-label" style="padding-left:50px">Title</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="title" id="title" placeholder="Enter Customer Title">
+                    <input type="text" class="form-control" name="title" id="title" value="{{ $customer->title }}">
                 </div>
             </div>
             <br>
@@ -65,7 +72,7 @@
                     <label for="name" class="control-label" style="padding-left:50px">Full Name</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter Customer Name">
+                    <input type="text" class="form-control" name="name" id="name" value="{{ $customer->name }}">
                 </div>
             </div>
             <br>
@@ -75,17 +82,19 @@
                     <label for="email" class="control-label" style="padding-left:50px">Login Email</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="email" id="email" placeholder="Enter Customer Email">
+                    <input type="text" class="form-control" name="email" id="email" value="{{ $customer->email }}">
                 </div>
             </div>
             <br>
             <div class="row">
+                @foreach($loginUsers as $lu)
                 <div class="col-md-3">
                     <label for="password" class="control-label" style="padding-left:50px">Login Password</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter Customer Password">
+                    <input type="password" class="form-control" name="password" id="password" value="{{ $lu->password }}">
                 </div>
+                @endforeach
             </div>
             <br>
             <div class="row">
@@ -93,7 +102,7 @@
                     <label for="contact_number" class="control-label" style="padding-left:50px">Contact Number</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="contact_number" id="contact_number" placeholder="Enter Contact Number">
+                    <input type="text" class="form-control" name="contact_number" id="contact_number" value="{{ $customer->contact_number }}">
                 </div>
             </div>
             <br>
@@ -103,8 +112,8 @@
                 </div>
                 <div class="col-md-8">
                     <select class="form-control" name="marital_status" id="marital_status">
-                        <option value="Married" selected>Married</option>
-                        <option value="Un-Married">Un-Married</option>
+                        <option @if($customer->marital_status == "Married") selected @endif value="Married">Married</option>
+                        <option @if($customer->marital_status == "Un-Married") selected @endif value="Un-Married">Un-Married</option>
                     </select>
                 </div>
             </div>
@@ -114,11 +123,12 @@
                     <label for="birth_date" class="control-label" style="padding-left:50px">Date Of Birth</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" name="birth_date" id="datepicker" placeholder="mm/dd/yyyy">
+                    <input type="text" class="form-control" name="birth_date" id="datepicker" value="{{ $customer->birth_date }}">
                 </div>
             </div>
             <br>
             <div class="row">
+                @foreach($addresses as $address)
                 <div class="col-md-3">
                     <label for="address" class="control-label" style="padding-left:50px">Address</label>
                 </div>
@@ -129,7 +139,7 @@
                                 <label for="house_no" class="control-label">House#</label>
                             </div>
                             <div class="col-md-6" style="max-width: 100%">
-                                <input type="text" class="form-control" name="house_no" id="house_no">
+                                <input type="text" class="form-control" name="house_no" id="house_no" value="{{ $address->house_no }}">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -137,7 +147,7 @@
                                 <label for="street_no" class="control-label">street#</label>
                             </div>
                             <div class="col-md-6" style="max-width: 100%">
-                                <input type="text" class="form-control" name="street_no" id="street_no">
+                                <input type="text" class="form-control" name="street_no" id="street_no" value="{{ $address->street_no }}">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -145,7 +155,7 @@
                                 <label for="area" class="control-label">Area</label>
                             </div>
                             <div class="col-md-8"  style="max-width: 100%">
-                                <input type="text" class="form-control" name="area" id="area">
+                                <input type="text" class="form-control" name="area" id="area" value="{{ $address->area }}">
                             </div>
                         </div>
                     </div>
@@ -155,7 +165,7 @@
                                 <label for="city" class="control-label">City</label>
                             </div>
                             <div class="col-md-6" style="max-width: 100%">
-                                <input type="text" class="form-control" name="city" id="city">
+                                <input type="text" class="form-control" name="city" id="city" value="{{ $address->city }}">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -163,7 +173,7 @@
                                 <label for="country" class="control-label">Country</label>
                             </div>
                             <div class="col-md-6" style="max-width: 100%">
-                                <input type="text" class="form-control" name="country" id="country">
+                                <input type="text" class="form-control" name="country" id="country" value="{{ $address->country }}">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -171,11 +181,12 @@
                                 <label for="postal_address" class="control-label">Postal Address</label>
                             </div>
                             <div class="col-md-8"  style="max-width: 100%">
-                                <textarea class="form-control" name="postal_address" id="postal_address"></textarea>
+                                <textarea class="form-control" name="postal_address" id="postal_address">{{ $address->postal_address }}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
             <br>
             </div>
@@ -186,7 +197,7 @@
                     </div>
                     <div class="col-md-8">
                         <select class="form-control"  name="creditor" id="creditor">
-                            <option value="none" selected> Please Select Creditor</option>
+                            {{-- <option value="none" selected> Please Select Creditor</option> --}}
                         @foreach($creditors as $creditor)
                             <option  value="{{$creditor->name}}">{{$creditor->name}}</option>
                         @endforeach
@@ -199,7 +210,7 @@
                         <label for="account_number" class="control-label" style="padding-left:50px">Account Number</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="account_number" id="account_number" placeholder="Enter Customer's Account Number">
+                        <input type="text" class="form-control" name="account_number" id="account_number"  value="{{$customer->account_number}}">
                     </div>
                 </div>
                 <br>
@@ -208,7 +219,7 @@
                         <label for="owed_amount" class="control-label" style="padding-left:50px">Owed</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="owed_amount" id="owed_amount" placeholder="">
+                        <input type="text" class="form-control" name="owed_amount" id="owed_amount"  value="{{$customer->owed_amount}}">
                     </div>
                 </div>
                 <br>
@@ -218,8 +229,8 @@
                     </div>
                     <div class="col-md-8">
                         <select class="form-control" name="payment_method" id="payment_method">
-                            <option value="online" selected>Online</option>
-                            <option value="cash">Cash</option>
+                            <option @if($customer->payment_method == "online") selected @endif value="online" selected>Online</option>
+                            <option @if($customer->payment_method == "cash") selected @endif value="cash">Cash</option>
                         </select>
                         {{-- <input type="text" class="form-control" name="payment_method" id="payment_method" placeholder="Select Customer's Payment Method"> --}}
                     </div>
@@ -231,7 +242,7 @@
                         <label for="income_desc" class="control-label" style="padding-left:50px">Description</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="income_desc" id="income_desc" placeholder="Customer's Income Description">
+                        <input type="text" class="form-control" name="income_desc" id="income_desc"  value="{{$customer->income_desc}}">
                     </div>
                 </div>
                 <br>
@@ -240,7 +251,7 @@
                         <label for="total_income" class="control-label" style="padding-left:50px">Total Income</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="total_income" id="total_income" placeholder="Customer's Total Income">
+                        <input type="text" class="form-control" name="total_income" id="total_income"  value="{{$customer->total_income}}">
                     </div>
                 </div>
                 <br>
@@ -249,7 +260,7 @@
                         <label for="income_note" class="control-label" style="padding-left:50px">Note</label>
                     </div>
                     <div class="col-md-8">
-                        <textarea class="form-control" name="income_note" id="income_note" placeholder="Note If any"></textarea>
+                        <textarea class="form-control" name="income_note" id="income_note">{{$customer->income_note}}</textarea>
                     </div>
                 </div>
                 <br>
@@ -267,7 +278,7 @@
                         <label for="income_date" class="control-label" style="padding-left:50px">Date of Income</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="income_date" id="income_date" placeholder="Enter Your Income Day">
+                        <input type="text" class="form-control" name="income_date" id="income_date"  value="{{$customer->income_date}}">
                     </div>
                 </div>
                 <br>
@@ -278,7 +289,7 @@
                         <label for="expenditure_desc" class="control-label" style="padding-left:50px">Description</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="expenditure_desc" id="expenditure_desc" placeholder="Customer's Expenditure Description">
+                        <input type="text" class="form-control" name="expenditure_desc" id="expenditure_desc"  value="{{$customer->expenditure_desc}}">
                     </div>
                 </div>
                 <br>
@@ -287,7 +298,7 @@
                         <label for="total_expenditure" class="control-label" style="padding-left:50px">Total Expenditure</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="total_expenditure" id="total_expenditure" placeholder="Customer's Total Expenditure">
+                        <input type="text" class="form-control" name="total_expenditure" id="total_expenditure"  value="{{$customer->total_expenditure}}">
                     </div>
                 </div>
                 <br>
@@ -296,7 +307,7 @@
                         <label for="expenditure_note" class="control-label" style="padding-left:50px">Note</label>
                     </div>
                     <div class="col-md-8">
-                        <textarea class="form-control" name="expenditure_note" id="expenditure_note" placeholder="Note If any"></textarea>
+                        <textarea class="form-control" name="expenditure_note" id="expenditure_note">{{$customer->expenditure_note}}</textarea>
                     </div>
                 </div>
                 <br>
@@ -321,53 +332,6 @@
             </div>
             <div id="summary" class="tabcontent">
                 <h3>About</h3>
-                <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                      <thead>
-                      <tr>
-                        <th>Total Income</th>
-                        <th>Total Expenditure</th>
-                        <th>Savings</th>
-                        <th>Eligibility Status</th>
-                        <th>Total Owed Amount</th>
-                        <th>Our Fee</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                        {{-- @foreach($customers as $customer) --}}
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          {{-- @if($customer->current_status == "pending")
-                              <td><span class="label label-warning">{{$customer->current_status}}</span></td>
-                          @elseif($customer->current_status == "processing")
-                              <td><span class="label label-primary">{{$customer->current_status}}</span></td>
-                          @elseif($customer->current_status == "confirm")
-                              <td><span class="label label-success">{{$customer->current_status}}</span></td>
-                          @endif --}}
-                          {{-- <td>
-                          <a style="margin-right:20px" href="/customers/edit/{{$customer->id}}"><i class="nav-icon fas fa-edit"></i></a> --}}
-                          {{-- <a style="margin-right:20px" href=""> --}}
-                            {{-- <i class="nav-icon fas fa-trash"> --}}
-                                {{-- <a onclick="clicked({{$customer->id}})" href="#" style="text-decoration: none">
-                                  <i class="nav-icon fas fa-trash">
-                                    <form method="POST" id="del{{$customer->id}}" action="/customer/{{$customer->id}}">
-                                      @csrf
-                                      <input type="hidden" name="_method" value="DELETE">
-                                    </form>
-                                  </i>
-                                </a>
-                          </td> --}}
-                        </tr>
-                        {{-- @endforeach --}}
-              
-                      </tbody>
-                    </table>
-                  </div>
                 <p>Who we are and what we do.</p>
                 <section class="content">
                     <div class="row">
@@ -608,7 +572,6 @@ document.getElementById("defaultOpen").click();
     $('#datepicker').datepicker({
       autoclose: true
     })
-    
 </script>
 {{-- <!-- FastClick -->
 <script src="../../bower_components/fastclick/lib/fastclick.js"></script>

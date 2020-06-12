@@ -56,7 +56,7 @@
             <div class="col-md-8">
                 <select class="form-control" name="designation" id="designation">
                     <option value="advisor" selected>Advisor</option>
-                    <option value="agent">Agent</option>
+                    <option value="backend">BackEnd</option>
                 </select>
             </div>
         </div>

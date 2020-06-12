@@ -58,7 +58,7 @@
             <div class="col-md-8">
                 <select class="form-control" name="designation" id="designation">
                     <option @if($s_agent->designation == "advisor") selected @endif value="advisor">Advisor</option>
-                    <option @if($s_agent->designation == "agent") selected @endif value="agent">Agent</option>
+                    <option @if($s_agent->designation == "backend") selected @endif value="backend">Backend</option>
                     {{-- <option value="advisor" selected>Advisor</option> --}}
                     {{-- <option value="agent">Agent</option> --}}
                 </select>
