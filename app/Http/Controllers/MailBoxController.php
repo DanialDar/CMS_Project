@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Webklex\IMAP\Client;
+
 
 use App\Model\Inbox;
 class MailBoxController extends Controller
@@ -127,6 +129,8 @@ class MailBoxController extends Controller
             ];
     \Mail::to($to_email)->send(new \App\Mail\Upload($data));
 
+    dd(\ReceivedMail::all());
+
 
         session()->flash('success', 'Mail Sent Successfully');
             return redirect()->back();
@@ -206,5 +210,126 @@ class MailBoxController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function readImap(){
+
+        $oClient = new Client([
+            'host'          => 'imap.secureserver.net',
+            'port'          => 993,
+            'encryption'    => 'ssl',
+            'validate_cert' => true,
+            'username'      => 'abdullah@sowebit.tech',
+            'password'      => 'MALONGneverlose1!',
+            'protocol'      => 'imap'
+        ]);
+
+        //Connect to the IMAP Server
+        $oClient->connect();
+
+
+//Get all Mailboxes
+//        /** @var \Webklex\IMAP\Support\FolderCollection $aFolder */
+
+        $aFolder = $oClient->getFolders();
+
+
+
+//Loop through every Mailbox
+//        /** @var \Webklex\IMAP\Folder $oFolder */
+        foreach($aFolder as $oFolder){
+
+            //Get all Messages of the current Mailbox $oFolder
+            /** @var \Webklex\IMAP\Support\MessageCollection $aMessage */
+//            $aMessage = $oFolder->messages()->all()->get();
+            $aMessage = $oFolder->query()->from('abdullahpsoft@gmail.com')->get();
+
+            /** @var \Webklex\IMAP\Message $oMessage */
+            foreach($aMessage as $oMessage){
+
+
+                echo $oMessage->getSubject().'<br />';
+                echo 'Attachments: '.$oMessage->getAttachments()->count().'<br />';
+                echo $oMessage->getHTMLBody(true);
+
+                //Move the current Message to 'INBOX.read'
+                if($oMessage->moveToFolder('INBOX.read') == true){
+                    echo 'Message has ben moved';
+                }else{
+                    echo 'Message could not be moved';
+                }
+
+
+            }
+        }
+    }
+
+
+    public function replies(){
+        $user_id = Auth::user()->id;
+        $messages = DB::table('inbox')->where('fromUserId', $user_id)->distinct()->get('toUserMail');
+
+        //IMAP CONNECT
+        $oClient = new Client([
+            'host'          => 'imap.secureserver.net',
+            'port'          => 993,
+            'encryption'    => 'ssl',
+            'validate_cert' => true,
+            'username'      => 'abdullah@sowebit.tech',
+            'password'      => 'MALONGneverlose1!',
+            'protocol'      => 'imap'
+        ]);
+
+        //Connect to the IMAP Server
+        $oClient->connect();
+
+
+        //READING MAIL FOLDERS
+        $aFolder = $oClient->getFolders();
+        $allMessages = array();
+        $fMessages = array();
+
+//Loop through every Mailbox
+//        /** @var \Webklex\IMAP\Folder $oFolder */
+        $i = 0;
+        foreach($aFolder as $oFolder){
+foreach ($messages as $message){
+            //Get all Messages of the current Mailbox $oFolder
+            /** @var \Webklex\IMAP\Support\MessageCollection $aMessage */
+//            $aMessage = $oFolder->messages()->all()->get();
+            $aMessage = $oFolder->query()->from($message->toUserMail)->get();
+
+            $allMessages['from'] = $message->toUserMail;
+
+            /** @var \Webklex\IMAP\Message $oMessage */
+            foreach($aMessage as $oMessage){
+                $aAttachment = $oMessage->getAttachments();
+
+                $allMessages['subject'] = $oMessage->getSubject().'<br />';
+                $allMessages['attachments'] = $oMessage->getAttachments();
+                $fileName = '';
+                $aAttachment->each(function ($oAttachment) {
+
+                    /** @var \Webklex\IMAP\Attachment $oAttachment */
+                    $oAttachment->save();
+
+                });
+
+                $allMessages['body'] = $oMessage->getHTMLBody(true);
+
+                //Move the current Message to 'INBOX.read'
+
+              $fMessages['item'.$i] = $allMessages;
+              $i++;
+            }
+        }
+        }
+
+
+//foreach ($fMessages as $newF){
+//    dd($newF['subject']);
+//
+//}
+//        dd($fMessages);
+       return view('mailbox.replies',compact('fMessages'));
     }
 }
