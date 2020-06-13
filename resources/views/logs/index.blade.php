@@ -18,18 +18,31 @@
         <tr>
           <th>Logs ID</th>
           <th>Details</th>
+          <th>Changed Values</th>
           <th>Created At</th>
         </tr>
         </thead>
-        <tbody>          
-          
+        <tbody>
+          @foreach ($logs as $log)          
           <tr>
-            <td>{{ $id }}</td>
-          <td>{{ $performed_by }} {{ $action }} {{ $performed_on }}</td>
-            <td>{{ $created_at }}</td>
-          </tr>
-          
-               
+            <td>{{ $log->id }}</td>
+            <td>{{ $log->performer_role }} "{{ $log->performed_by }}" {{ $log->action }} {{ $log->performed_on_role }} "{{ $log->performed_on }}"</td>
+            <td>
+              @if($log->action == "Creates")
+                No Changes
+              @elseif($log->action == "Updates")  
+                @php $changes = unserialize($log->changes);@endphp
+                @if(is_array($changes))
+                  @foreach($changes as $change)
+                    {{ $change }}
+                    <br>
+                  @endforeach
+                @endif
+              @endif    
+            </td>
+            <td>{{ $log->created_at }}</td>
+          </tr>  
+          @endforeach
         </tbody>
       </table>
     </div>

@@ -17,20 +17,10 @@ class LogsController extends Controller
      */
     public function index()
     {
-        $logs = DB::table('logs')->get();
-        foreach($logs as $log){
-            $id = $log->id;
-            $performed_by_user = DB::table('users')->where('id', $log->created_by)->pluck('name');
-            $performed_by = $performed_by_user[0];
-            $performed_on_user = DB::table('users')->where('id', $log->user_id)->pluck('name');
-            $performed_on = $performed_on_user[0];
-            $action = $log->action;
-            $created_at = date('Y-m-d', strtotime($log->created_at));
-            // $created_by = $log->created_at;
-            // dd($performed_by);
-        }
-        
-        return view('logs.index',compact(['id','performed_by','performed_on','action','created_at']));
+        $logs = DB::table('logs')->orderBy('id', 'desc')->get();
+        // $changes = unserialize($logs->changes);
+        // dd($changes);
+        return view('logs.index',compact(['logs']));
     }
 
     /**
