@@ -33,8 +33,8 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-filter"></i> Junk
+                  <a href="/replies" class="nav-link">
+                    <i class="fas fa-filter"></i> Replies
                     <span class="badge bg-warning float-right">65</span>
                   </a>
                 </li>
