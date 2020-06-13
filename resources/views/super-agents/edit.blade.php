@@ -63,7 +63,7 @@
                     {{-- <option value="agent">Agent</option> --}}
                 </select>
             </div>
-        </div>
+        </div> 
         <br>
         <input type="hidden" class="form-control" name="super_agent_id" id="super_agent_id" value="{{$s_agent->id }}">
       </div>
