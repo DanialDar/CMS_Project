@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Attachments;
+use App\Model\Attachs;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -218,8 +219,8 @@ class MailBoxController extends Controller
             'port'          => 993,
             'encryption'    => 'ssl',
             'validate_cert' => true,
-            'username'      => 'abdullah@sowebit.tech',
-            'password'      => 'MALONGneverlose1!',
+            'username'      => '',
+            'password'      => '',
             'protocol'      => 'imap'
         ]);
 
@@ -305,7 +306,7 @@ foreach ($messages as $message){
                 $aAttachment = $oMessage->getAttachments();
 
                 $allMessages['subject'] = $oMessage->getSubject().'<br />';
-                $allMessages['attachments'] = $oMessage->getAttachments();
+                $allMessages['attachments'] = $oMessage->getAttachments()->count();
                 $fileName = '';
                 $aAttachment->each(function ($oAttachment) {
 
@@ -318,6 +319,17 @@ foreach ($messages as $message){
 
                 //Move the current Message to 'INBOX.read'
 
+                if ($allMessages['attachments'] > 0 ){
+                    foreach ($oMessage->getAttachments() as $key => $oAttachment) {
+                        $filename =  $oAttachment->getName();
+
+                        Attachs::create([
+                            'user_mail' => $message->toUserMail,
+                            'filename' => $filename
+                        ]);
+
+                    }
+                    }
               $fMessages['item'.$i] = $allMessages;
               $i++;
             }
@@ -329,7 +341,7 @@ foreach ($messages as $message){
 //    dd($newF['subject']);
 //
 //}
-//        dd($fMessages);
+       //dd($fMessages);
        return view('mailbox.replies',compact('fMessages'));
     }
 }

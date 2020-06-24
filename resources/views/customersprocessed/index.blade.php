@@ -44,7 +44,11 @@
             <td>
 
                 <a style="margin-right:20px" href="/customerspool/edit/{{$customer->id}}"><i class="nav-icon fas fa-mail-bulk"></i> Send Mail</a>
-
+             @foreach($attachs as $attachment)
+              @if($attachment->user_mail == $customer->email)
+                        <a style="margin-right:20px"  href="/download/{{$attachment->filename}}"><i class="nav-icon fas fa-file"></i> {{$attachment->filename}}</a>
+@endif
+                @endforeach
                 {{--            <a style="margin-right:20px" href="/customers/edit/{{$customer->id}}"><i class="nav-icon fas fa-edit"></i></a>--}}
 {{--          --}}
 {{--            --}}{{-- <a style="margin-right:20px" href=""> --}}

@@ -30,8 +30,8 @@
     }
 </style>
 
-
-<div class="box box-info">
+<body onload="myFunction()">
+<div class="box box-info"  >
     <div class="box-header with-border">
       <h3 class="box-title" style="padding-left: 10px">Create Customer</h3>
     </div>
@@ -128,6 +128,20 @@
                 </div>
             </div>
             <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="birth_date" class="control-label" style="padding-left:50px">Attachments</label>
+                    </div>
+                    <div class="col-md-8">
+
+                        @foreach($attachs as $attachment)
+                            @if($attachment->user_mail == $customer->email)
+                                <a style="margin-right:20px"  href="/download/{{$attachment->filename}}"><i class="nav-icon fas fa-file"></i> {{$attachment->filename}}</a>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+                <br>
             <div class="row">
                 @foreach($addresses as $address)
                 <div class="col-md-3">
@@ -343,61 +357,15 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+                                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12">
+                                                <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
                                                     <thead>
                                                     <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Status</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Amount</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Overtime</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Additional</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Total</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Paid</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Paid Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Fees</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Org. Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Pay Method</th></tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr role="row" class="odd">
-                                                        <td class="sorting_1 dtr-control">0</td>
-                                                        <td>6/9/20</td>
-                                                        <td>10000</td>
-                                                        <td>1.7</td>
-                                                        <td>A</td>
-                                                        <td class="sorting_1 dtr-control">17000</td>
-                                                        <td>Paid</td>
-                                                        <td>6/9/20</td>
-                                                        <td>1.7</td>
-                                                        <td>A</td>
-                                                        <td>A</td>
-                                                    </tr><tr role="row" class="even">
-                                                        <td class="sorting_1 dtr-control">0</td>
-                                                        <td>6/9/20</td>
-                                                        <td>10000</td>
-                                                        <td>1.7</td>
-                                                        <td>A</td>
-                                                        <td class="sorting_1 dtr-control">17000</td>
-                                                        <td>Paid</td>
-                                                        <td>6/9/20</td>
-                                                        <td>1.7</td>
-                                                        <td>A</td>
-                                                        <td>A</td></tr><tr role="row" class="odd">
-                                                        <td class="sorting_1 dtr-control">0</td>
-                                                        <td>6/9/20</td>
-                                                        <td>10000</td>
-                                                        <td>1.7</td>
-                                                        <td>A</td>
-                                                        <td class="sorting_1 dtr-control">17000</td>
-                                                        <td>Paid</td>
-                                                        <td>6/9/20</td>
-                                                        <td>1.7</td>
-                                                        <td>A</td>
-                                                        <td>A</td></tr><tr role="row" class="even">
-                                                        <td class="sorting_1 dtr-control">0</td>
-                                                        <td>6/9/20</td>
-                                                        <td>10000</td>
-                                                        <td>1.7</td>
-                                                        <td>A</td>
-                                                        <td class="sorting_1 dtr-control">17000</td>
-                                                        <td>Paid</td>
-                                                        <td>6/9/20</td>
-                                                        <td>1.7</td>
-                                                        <td>A</td>
-                                                        <td>A</td>   </tr>
+
                                                     </tbody>
-                                                    <tfoot>
-                                                    <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Status</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Amount</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Overtime</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Additional</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Total</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Paid</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Paid Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Fees</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Org. Date</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Pay Method</th></tr>
-                                                    </tfoot>
+
                                                 </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
                                 </div>
                                 <!-- /.card-body -->
@@ -442,6 +410,40 @@ function openPage(pageName,elmnt,color) {
 }
 document.getElementById("defaultOpen").click();
 </script>
+<script>
+    function myFunction() {
+
+        var table = document.getElementById("example2");
+        var row = table.insertRow(-1);
+        var status = row.insertCell(0);
+        var date = row.insertCell(1);
+        var amount = row.insertCell(2);
+        var overtime = row.insertCell(3);
+        var additional = row.insertCell(4);
+        var total = row.insertCell(5);
+        var paid = row.insertCell(6);
+        var paiddate = row.insertCell(7);
+        var fees = row.insertCell(8);
+        var orgdate = row.insertCell(9);
+        var paymethod = row.insertCell(10);
+
+
+        status.innerHTML = '{{$customer->current_status}}';
+        date.innerHTML = '{{$customer->income_date}}';
+        amount.innerHTML = '{{$customer->owed_amount}}';
+        overtime.innerHTML = 'NA';
+        additional.innerHTML = 'NA';
+        total.innerHTML = '{{$customer->owed_amount * 1.7}}';
+        paid.innerHTML = 'NA';
+        paiddate.innerHTML = 'NA';
+        fees.innerHTML = '1.7';
+        orgdate.innerHTML = '{{$customer->income_date}}';
+        paymethod.innerHTML = 'na';
+        var myDate = new Date( '{{$customer->income_date}}');
+        alert(myDate.add(1).month());
+    }
+</script>
+</body>
 {{-- <br>
 <div class="box box-info">
     <div class="box-header with-border">

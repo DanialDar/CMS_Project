@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Attachs;
 use Illuminate\Http\Request;
 use App\Model\Customer;
 use App\User;
@@ -72,7 +73,7 @@ class CustomerController extends Controller
         DB::insert('insert into users (name,email,role_id,password,customer_id) values(?,?,?,?,?)',[$name,$email,$role_id,$password,$id]);
 
         // customer_id,house_no,street_no,area,city,country,postal_address
-        
+
         $house_no = $_POST['house_no'];
         $street_no = $_POST['street_no'];
         $area = $_POST['area'];
@@ -117,7 +118,8 @@ class CustomerController extends Controller
         $loginUsers = DB::table('users')->where('customer_id', $customer->id)->get();
         $addresses = DB::table('addresses')->where('customer_id', $customer->id)->get();
         // return view('testing',compact(['customer', 'loginUsers','addresses','creditors']));
-        return view('customers.edit',compact(['customer', 'loginUsers','addresses','creditors']));
+        $attachs = Attachs::all();
+        return view('customers.edit',compact(['customer', 'loginUsers','addresses','creditors','attachs']));
     }
 
     /**
@@ -193,7 +195,7 @@ class CustomerController extends Controller
         ->where('customer_id', $customer_id)
         ->update(['house_no' => $house_no, 'street_no' => $street_no, 'area' => $area, 'postal_address' => $postal_address, 'city' => $city, 'country' => $country ]);
 
-        
+
         $changes = serialize($changes_array);
         $performed_by = Auth::user()->name;
         // $performer_role = "Agent";
@@ -212,7 +214,7 @@ class CustomerController extends Controller
         elseif(Auth::user()->role_id == 5){
             return redirect('/dashboard');
         }
-        
+
     }
 
     public function updateforcustomer(Request $request, $id)
@@ -293,7 +295,16 @@ class CustomerController extends Controller
     {
         // $customers = DB::table('customers')->where('agent_id', $agent_id)->get();
         $customers = DB::table('customers')->where('current_status', 'processing')->get();
-        return view('customersprocessed.index',compact(['customers']));
-    }
+        $attachs = Attachs::all();
 
+        return view('customersprocessed.index',compact(['customers','attachs']));
+    }
+public function download($name){
+    $path = storage_path($name);
+
+    return response()->download($path);
+
+
+
+    }
 }

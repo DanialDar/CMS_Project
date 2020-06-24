@@ -139,7 +139,7 @@
                                     <td class="mailbox-subject"><b>{{$message['subject']}}</b> {{$message['body']}} ...
                                     </td>
                                     @if($message['attachments'] != null)
-                                        <td class="mailbox-attachment"><a href="#">{{$message['attachments']}}<i class="fas fa-paperclip"></i></a></td>
+                                        <td class="mailbox-attachment"><a href="#"><i class="fas fa-paperclip"></i></a></td>
                                     @endif
                                     @if($message['attachments']== null)
                                         <td class="mailbox-attachment"></td>

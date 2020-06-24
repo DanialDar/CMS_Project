@@ -94,3 +94,4 @@ Route::get('/replies', 'MailBoxController@replies');
 Route::get('/logs', 'LogsController@index');
 
 Route::get('/imap','MailBoxController@readImap');
+Route::get('/download/{name}', 'CustomerController@download');

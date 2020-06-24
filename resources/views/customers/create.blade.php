@@ -226,12 +226,15 @@
                 </div>
             </div>
             <div id="income" class="tabcontent">
+                <div class='input-form'>
+
+
                 <div class="row">
                     <div class="col-md-3">
                         <label for="income_desc" class="control-label" style="padding-left:50px">Description</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="income_desc" id="income_desc" placeholder="Customer's Income Description">
+                        <input type="text" class="form-control txt" name="income_desc" id="incomeDesc_1" placeholder="Customer's Income Description">
                     </div>
                 </div>
                 <br>
@@ -240,7 +243,7 @@
                         <label for="total_income" class="control-label" style="padding-left:50px">Total Income</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="total_income" id="total_income" placeholder="Customer's Total Income">
+                        <input type="text" class="form-control txt" name="total_income" id="totalIncome_1"   placeholder="Customer's Total Income">
                     </div>
                 </div>
                 <br>
@@ -249,7 +252,7 @@
                         <label for="income_note" class="control-label" style="padding-left:50px">Note</label>
                     </div>
                     <div class="col-md-8">
-                        <textarea class="form-control" name="income_note" id="income_note" placeholder="Note If any"></textarea>
+                        <textarea class="form-control txt" name="income_note" id="incomeNote_1" placeholder="Note If any"></textarea>
                     </div>
                 </div>
                 <br>
@@ -258,7 +261,7 @@
                         <label for="income_proof" class="control-label" style="padding-left:50px">Proof Attachment</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="income_proof" id="income_proof" placeholder="">
+                        <input type="text" class="form-control txt"  name="income_proof" id="incomeProof_1" placeholder="">
                     </div>
                 </div>
                 <br>
@@ -267,12 +270,17 @@
                         <label for="income_date" class="control-label" style="padding-left:50px">Date of Income</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="income_date" id="income_date" placeholder="Enter Your Income Day">
+                        <input type="text" class="form-control txt" name="income_date" id="incomeDate_1" placeholder="Enter Your Income Day">
                     </div>
                 </div>
                 <br>
+                    <hr>
+                    <hr>
+            </div><input type='button' class="btn btn-outline-danger " id='but_add' value='Add new'>
+
             </div>
             <div id="expenditure" class="tabcontent">
+                <div  class='input-form2'>
                 <div class="row">
                     <div class="col-md-3">
                         <label for="expenditure_desc" class="control-label" style="padding-left:50px">Description</label>
@@ -319,6 +327,9 @@
                 </div>
                 <br>
             </div>
+                <input type='button' class="btn btn-outline-danger " id='but_add2' value='Add new'>
+
+            </div>
             <div id="summary" class="tabcontent">
                 <h3>About</h3>
                 <div class="box-body">
@@ -364,7 +375,7 @@
                           </td> --}}
                         </tr>
                         {{-- @endforeach --}}
-              
+
                       </tbody>
                     </table>
                   </div>
@@ -599,6 +610,7 @@ document.getElementById("defaultOpen").click();
   </div>--}}
 
 <link rel="stylesheet" href="/css/ionicons.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="/js/adminlte.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/app.js"></script>
@@ -608,7 +620,69 @@ document.getElementById("defaultOpen").click();
     $('#datepicker').datepicker({
       autoclose: true
     })
-    
+
+</script>
+<script>$(document).ready(function(){
+
+        $('#but_add').click(function(){
+
+            // Selecting last id
+            var lastname_id = $('.input-form input[type=text]:nth-child(1)').last().attr('id');
+            var split_id = lastname_id.split('_');
+
+            // New index
+            var index = Number(split_id[1]) + 1;
+
+            // Create clone
+            var newel = $('.input-form:last').clone(true);
+
+            // Set id of new element
+           // $(newel).find('input[type=text]:nth-child(1)').attr("id","incomeDesc_"+index);
+            $(newel).find('input[type=text]:nth-child(2)').attr("id","totalIncome_"+index);
+            $(newel).find('input[type=text]:nth-child(3)').attr("id","incomeNote_"+index);
+            $(newel).find('input[type=text]:nth-child(4)').attr("id","incomeProof_"+index);
+            $(newel).find('input[type=text]:nth-child(5)').attr("id","incomeDate_"+index);
+            // Set value
+           // $(newel).find('input[type=text]:nth-child(1)').val("incomeDesc_"+index);
+            $(newel).find('input[type=text]:nth-child(2)').val("totalIncome_"+index);
+            $(newel).find('input[type=text]:nth-child(3)').val("incomeNote_"+index);
+            $(newel).find('input[type=text]:nth-child(4)').val("incomeProof_"+index);
+            $(newel).find('input[type=text]:nth-child(5)').val("incomeDate_"+index);
+
+            // Insert element
+            $(newel).insertAfter(".input-form:last");
+        });
+
+        $('#but_add2').click(function(){
+
+            // Selecting last id
+            var lastname_id = $('.input-form2 input[type=text]:nth-child(1)').last().attr('id');
+            var split_id = lastname_id.split('_');
+
+            // New index
+            var index = Number(split_id[1]) + 1;
+
+            // Create clone
+            var newel = $('.input-form2:last').clone(true);
+
+            // Set id of new element
+            // $(newel).find('input[type=text]:nth-child(1)').attr("id","incomeDesc_"+index);
+            $(newel).find('input[type=text]:nth-child(2)').attr("id","totalIncome_"+index);
+            $(newel).find('input[type=text]:nth-child(3)').attr("id","incomeNote_"+index);
+            $(newel).find('input[type=text]:nth-child(4)').attr("id","incomeProof_"+index);
+            $(newel).find('input[type=text]:nth-child(5)').attr("id","incomeDate_"+index);
+            // Set value
+            // $(newel).find('input[type=text]:nth-child(1)').val("incomeDesc_"+index);
+            $(newel).find('input[type=text]:nth-child(2)').val("totalIncome_"+index);
+            $(newel).find('input[type=text]:nth-child(3)').val("incomeNote_"+index);
+            $(newel).find('input[type=text]:nth-child(4)').val("incomeProof_"+index);
+            $(newel).find('input[type=text]:nth-child(5)').val("incomeDate_"+index);
+
+            // Insert element
+            $(newel).insertAfter(".input-form2:last");
+        });
+
+    });
 </script>
 {{-- <!-- FastClick -->
 <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
