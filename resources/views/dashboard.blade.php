@@ -174,48 +174,27 @@
                   <th>Created At</th>
                   <th>Status</th>
                 </tr>
+               @isset($customers)
+                      @foreach($customers as $customer)
+                          @if($customer->current_status == 'processing' )
                 <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>Bacon ipsum</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-success">Approved</span></td>
+                  <td>{{$customer->id}}</td>
+                  <td>{{$customer->name}}</td>
+                    <td>
+                        @isset($users)
+                      @foreach($users as $user)
+                            @if($user->id == $customer->agent_id)
+                    {{$user->name}}
+                         @endif
+                        @endforeach
+                    @endisset
+                    </td>
+                    <td>{{$customer->created_at}}</td>
+                  <td><span class="label label-success">{{$customer->current_status}}</span></td>
                 </tr>
-                <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>Bacon ipsum</td>
-                    <td>11-7-2014</td>
-                    <td><span class="label label-success">Approved</span></td>
-                </tr>
-                <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>Bacon ipsum</td>
-                    <td>11-7-2014</td>
-                    <td><span class="label label-success">Approved</span></td>
-                </tr>
-                <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>Bacon ipsum</td>
-                    <td>11-7-2014</td>
-                    <td><span class="label label-success">Approved</span></td>
-                </tr>
-                <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>Bacon ipsum</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-success">Approved</span></td>
-                </tr>
-                <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>Bacon ipsum</td>
-                    <td>11-7-2014</td>
-                    <td><span class="label label-success">Approved</span></td>
-                  </tr>
+                          @endif
+                      @endforeach
+                @endisset
               </table>
             </div>
             <!-- /.box-body -->
