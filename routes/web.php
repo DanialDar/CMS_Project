@@ -95,3 +95,7 @@ Route::get('/logs', 'LogsController@index');
 
 Route::get('/imap','MailBoxController@readImap');
 Route::get('/download/{name}', 'CustomerController@download');
+
+Route::post('/creditorAdd', 'CustomerController@addCreditor');
+Route::post('/incomeAdd', 'CustomerController@addIncome');
+Route::post('/expenditureAdd', 'CustomerController@addExp');

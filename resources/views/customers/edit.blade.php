@@ -207,10 +207,13 @@
             </div>
             <div id="creditor_info" class="tabcontent">
                 <div class="row">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Creditor</button>
+                </div>
+                <div class="row"  style="display: none">
                     <div class="col-md-3">
                         <label for="creditor" class="control-label" style="padding-left:50px">Creditor </label>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8" >
                         <select class="form-control"  name="creditor" id="creditor">
                             {{-- <option value="none" selected> Please Select Creditor</option> --}}
                         @foreach($creditors as $creditor)
@@ -220,7 +223,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row"  style="display: none">
                     <div class="col-md-3">
                         <label for="account_number" class="control-label" style="padding-left:50px">Account Number</label>
                     </div>
@@ -229,7 +232,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row"  style="display: none">
                     <div class="col-md-3">
                         <label for="owed_amount" class="control-label" style="padding-left:50px">Owed</label>
                     </div>
@@ -238,7 +241,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row"  style="display: none">
                     <div class="col-md-3">
                         <label for="payment_method" class="control-label" style="padding-left:50px">Payment Method</label>
                     </div>
@@ -253,6 +256,9 @@
             </div>
             <div id="income" class="tabcontent">
                 <div class="row">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalIncome">Add Income</button>
+                </div>
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label for="income_desc" class="control-label" style="padding-left:50px">Description</label>
                     </div>
@@ -261,7 +267,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label for="total_income" class="control-label" style="padding-left:50px">Total Income</label>
                     </div>
@@ -270,7 +276,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label for="income_note" class="control-label" style="padding-left:50px">Note</label>
                     </div>
@@ -279,7 +285,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label for="income_proof" class="control-label" style="padding-left:50px">Proof Attachment</label>
                     </div>
@@ -288,7 +294,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label for="income_date" class="control-label" style="padding-left:50px">Date of Income</label>
                     </div>
@@ -299,7 +305,11 @@
                 <br>
             </div>
             <div id="expenditure" class="tabcontent">
-                <div class="row">
+                <div  class='input-form2'>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalExpenditure">Add Expenditure</button>
+
+                </div>
+                <div class="row " style="display: none">
                     <div class="col-md-3">
                         <label for="expenditure_desc" class="control-label" style="padding-left:50px">Description</label>
                     </div>
@@ -308,7 +318,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label for="total_expenditure" class="control-label" style="padding-left:50px">Total Expenditure</label>
                     </div>
@@ -317,7 +327,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="display:none;">
                     <div class="col-md-3">
                         <label for="expenditure_note" class="control-label" style="padding-left:50px">Note</label>
                     </div>
@@ -326,7 +336,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label for="expenditure_proof" class="control-label" style="padding-left:50px">Proof Attachment</label>
                     </div>
@@ -335,7 +345,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label for="expenditure_schedule" class="control-label" style="padding-left:50px">Expenditure Schedule</label>
                     </div>
@@ -394,6 +404,219 @@
         </form>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <form action="/creditorAdd" id="addCreditor" method="POST" enctype="multipart/form-data" onsubmit=" " >
+        @csrf
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Creditor Form</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="customer_id" class="control-label" style="padding-left:50px">Customer's ID:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="customer_id" id="customer_id" value="{{$customer->id}}">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <label for="creditor" class="control-label" style="padding-left:50px">Creditor </label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control"  name="creditor" id="creditor">
+                            <option value="none" selected> Please Select Creditor</option>
+                            @foreach($creditors as $creditor)
+                                <option  value="{{$creditor->name}}">{{$creditor->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="account_number" class="control-label" style="padding-left:50px">Account Number</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="account_number" id="account_number" placeholder="Enter Customer's Account Number">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="owed_amount" class="control-label" style="padding-left:50px">Owed</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="owed_amount" id="owed_amount" placeholder="">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="payment_method" class="control-label" style="padding-left:50px">Payment Method</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" name="payment_method" id="payment_method">
+                            <option value="online" selected>Online</option>
+                            <option value="cash">Cash</option>
+                        </select>
+                        {{-- <input type="text" class="form-control" name="payment_method" id="payment_method" placeholder="Select Customer's Payment Method"> --}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit"  class="btn btn-success" >Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalExpenditure" role="dialog">
+    <form action="/expenditureAdd" id="addIncome" method="POST" enctype="multipart/form-data" onsubmit=" " >
+        @csrf
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Expenditure Form</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="customer_id" class="control-label" style="padding-left:50px">Customer's ID:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="customer_id" id="customer_id" value="{{$customer->id}}">
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="expenditure_desc" class="control-label" style="padding-left:50px">Description</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="expenditure_desc" id="expenditure_desc" placeholder="Customer's Expenditure Description">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="total_expenditure" class="control-label" style="padding-left:50px">Total Expenditure</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="total_expenditure" id="total_expenditure" placeholder="Customer's Total Expenditure">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="expenditure_note" class="control-label" style="padding-left:50px">Note</label>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea class="form-control" name="expenditure_note" id="expenditure_note" placeholder="Note If any"></textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="expenditure_proof" class="control-label" style="padding-left:50px">Proof Attachment</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="expenditure_proof" id="expenditure_proof" placeholder="">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="expenditure_schedule" class="control-label" style="padding-left:50px">Expenditure Schedule</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="expenditure_schedule" id="expenditure_schedule" placeholder="Enter Your Expenditure Schedule">
+                    </div>
+                </div>
+                <br>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit"  class="btn btn-success" >Add</button>
+                </div>
+            </div></div></form></div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModalIncome" role="dialog">
+    <form action="/incomeAdd" id="addIncome" method="POST" enctype="multipart/form-data" onsubmit=" " >
+        @csrf
+
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Income Form</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="customer_id" class="control-label" style="padding-left:50px">Customer's ID:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="customer_id" id="customer_id" value="{{$customer->id}}">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="income_desc" class="control-label" style="padding-left:50px">Description</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control txt" name="income_desc" id="incomeDesc_1" placeholder="Customer's Income Description">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="total_income" class="control-label" style="padding-left:50px">Total Income</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control txt" name="total_income" id="totalIncome_1"   placeholder="Customer's Total Income">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="income_note" class="control-label" style="padding-left:50px">Note</label>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea class="form-control txt" name="income_note" id="incomeNote_1" placeholder="Note If any"></textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="income_proof" class="control-label" style="padding-left:50px">Proof Attachment</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control txt"  name="income_proof" id="incomeProof_1" placeholder="">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="income_date" class="control-label" style="padding-left:50px">Date of Income</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control txt" name="income_date" id="incomeDate_1" placeholder="Enter Your Income Day">
+                    </div>
+                </div>    <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit"  class="btn btn-success" >Add</button>
+                </div></div></div></form></div>
 <script>
 function openPage(pageName,elmnt,color) {
   var i, tabcontent, tablinks;

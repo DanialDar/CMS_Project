@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Model\Attachs;
+use App\Model\CreditorInfo;
+use App\Model\ExpenditureInfo;
+use App\Model\IncomeInfo;
 use Illuminate\Http\Request;
 use App\Model\Customer;
 use App\User;
@@ -306,5 +309,62 @@ public function download($name){
 
 
 
+    }
+
+    public function addCreditor(Request $request)
+    {
+
+        $arrCustomer = array();
+        $arrCustomer['name'] = $request->creditor;
+        $arrCustomer['acc_no'] =$request->account_number;
+        $arrCustomer['owed'] = $request->owed_amount;
+        $arrCustomer['method'] = $request->payment_method;
+        if(isset($request->customer_id)){
+
+            $arrCustomer['customer_id'] = $request->customer_id;
+
+        }
+     CreditorInfo::create($arrCustomer);
+
+    return redirect()->back();
+    }  public function addIncome(Request $request)
+    {
+
+        $arrIncome = array();
+        $arrIncome['description'] = $request->income_desc;
+        $arrIncome['total_income'] =$request->total_income;
+        $arrIncome['note'] = $request->income_note;
+        $arrIncome['proof_of_attachment'] = $request->income_proof;
+        $arrIncome['date_of_income'] = $request->income_date;
+        if(isset($request->customer_id)){
+
+            $arrIncome['customer_id'] = $request->customer_id;
+
+        }
+     IncomeInfo::create($arrIncome);
+
+    return redirect()->back();
+    }
+    public function addExp(Request $request)
+    {
+
+
+        $arrExp = array();
+        $arrExp['description'] = $request->expenditure_desc;
+        $arrExp['total_exp'] =$request->total_expenditure;
+        $arrExp['note'] = $request->expenditure_note;
+        $arrExp['proof_of_attachment'] = $request->expenditure_proof;
+        $arrExp['schedule'] = $request->expenditure_schedule;
+        if(isset($request->customer_id)){
+
+            $arrExp['customer_id'] = $request->customer_id;
+
+        }
+
+
+
+     ExpenditureInfo::create($arrExp);
+
+    return redirect()->back();
     }
 }

@@ -36,7 +36,8 @@ class HomeController extends Controller
     {
         $leads = DB::table('lead_introducers')->get();
         $creditors = DB::table('creditors')->get();
-
-        return view('dashboard',compact('leads', 'creditors'));
+        $customers = DB::table('customers')->get();
+        $users = DB::table('users')->get();
+        return view('dashboard',compact('leads', 'creditors','customers', 'users'));
     }
 }

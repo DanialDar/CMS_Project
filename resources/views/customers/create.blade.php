@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<style>
+       <style>
     * {box-sizing: border-box}
     body, html {
       height: 100%;
@@ -181,154 +181,32 @@
             </div>
             <div id="creditor_info" class="tabcontent">
                 <div class="row">
-                    <div class="col-md-3">
-                        <label for="creditor" class="control-label" style="padding-left:50px">Creditor </label>
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control"  name="creditor" id="creditor">
-                            <option value="none" selected> Please Select Creditor</option>
-                        @foreach($creditors as $creditor)
-                            <option  value="{{$creditor->name}}">{{$creditor->name}}</option>
-                        @endforeach
-                        </select>
-                    </div>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Creditor</button>
+                </div>
+                <div class="row">
+
+
                 </div>
                 <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="account_number" class="control-label" style="padding-left:50px">Account Number</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="account_number" id="account_number" placeholder="Enter Customer's Account Number">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="owed_amount" class="control-label" style="padding-left:50px">Owed</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="owed_amount" id="owed_amount" placeholder="">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="payment_method" class="control-label" style="padding-left:50px">Payment Method</label>
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control" name="payment_method" id="payment_method">
-                            <option value="online" selected>Online</option>
-                            <option value="cash">Cash</option>
-                        </select>
-                        {{-- <input type="text" class="form-control" name="payment_method" id="payment_method" placeholder="Select Customer's Payment Method"> --}}
-                    </div>
-                </div>
+
+
             </div>
             <div id="income" class="tabcontent">
                 <div class='input-form'>
 
+                    <div class="row">
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalIncome">Add Income</button>
+                    </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="income_desc" class="control-label" style="padding-left:50px">Description</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control txt" name="income_desc" id="incomeDesc_1" placeholder="Customer's Income Description">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="total_income" class="control-label" style="padding-left:50px">Total Income</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control txt" name="total_income" id="totalIncome_1"   placeholder="Customer's Total Income">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="income_note" class="control-label" style="padding-left:50px">Note</label>
-                    </div>
-                    <div class="col-md-8">
-                        <textarea class="form-control txt" name="income_note" id="incomeNote_1" placeholder="Note If any"></textarea>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="income_proof" class="control-label" style="padding-left:50px">Proof Attachment</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control txt"  name="income_proof" id="incomeProof_1" placeholder="">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="income_date" class="control-label" style="padding-left:50px">Date of Income</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control txt" name="income_date" id="incomeDate_1" placeholder="Enter Your Income Day">
-                    </div>
-                </div>
-                <br>
-                    <hr>
-                    <hr>
-            </div><input type='button' class="btn btn-outline-danger " id='but_add' value='Add new'>
 
+                <br>
+            </div>
             </div>
             <div id="expenditure" class="tabcontent">
                 <div  class='input-form2'>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="expenditure_desc" class="control-label" style="padding-left:50px">Description</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="expenditure_desc" id="expenditure_desc" placeholder="Customer's Expenditure Description">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="total_expenditure" class="control-label" style="padding-left:50px">Total Expenditure</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="total_expenditure" id="total_expenditure" placeholder="Customer's Total Expenditure">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="expenditure_note" class="control-label" style="padding-left:50px">Note</label>
-                    </div>
-                    <div class="col-md-8">
-                        <textarea class="form-control" name="expenditure_note" id="expenditure_note" placeholder="Note If any"></textarea>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="expenditure_proof" class="control-label" style="padding-left:50px">Proof Attachment</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="expenditure_proof" id="expenditure_proof" placeholder="">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="expenditure_schedule" class="control-label" style="padding-left:50px">Expenditure Schedule</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="expenditure_schedule" id="expenditure_schedule" placeholder="Enter Your Expenditure Schedule">
-                    </div>
-                </div>
-                <br>
-            </div>
-                <input type='button' class="btn btn-outline-danger " id='but_add2' value='Add new'>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalExpenditure">Add Expenditure</button>
 
+            </div>
             </div>
             <div id="summary" class="tabcontent">
                 <h3>About</h3>
@@ -471,7 +349,338 @@
           <!-- /.box-footer -->
         </form>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    <form action="/creditorAdd" id="addCreditor" method="POST" enctype="multipart/form-data" onsubmit=" " >
+        @csrf
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Creditor Form</h4>
+            </div>
+            <div class="row">
 
+                <div class="col-md-3">
+                    <label for="creditor" class="control-label" style="padding-left:50px">Creditor </label>
+                </div>
+                <div class="col-md-8">
+                    <select class="form-control"  name="creditor" id="creditor">
+                        <option value="none" selected> Please Select Creditor</option>
+                        @foreach($creditors as $creditor)
+                            <option  value="{{$creditor->name}}">{{$creditor->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="account_number" class="control-label" style="padding-left:50px">Account Number</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="account_number" id="account_number" placeholder="Enter Customer's Account Number">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="owed_amount" class="control-label" style="padding-left:50px">Owed</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="owed_amount" id="owed_amount" placeholder="">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="payment_method" class="control-label" style="padding-left:50px">Payment Method</label>
+                </div>
+                <div class="col-md-8">
+                    <select class="form-control" name="payment_method" id="payment_method">
+                        <option value="online" selected>Online</option>
+                        <option value="cash">Cash</option>
+                    </select>
+                    {{-- <input type="text" class="form-control" name="payment_method" id="payment_method" placeholder="Select Customer's Payment Method"> --}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit"  class="btn btn-success" >Add</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+       <div class="modal fade" id="myModalExpenditure" role="dialog">
+           <form action="/expenditureAdd" id="addIncome" method="POST" enctype="multipart/form-data" onsubmit=" " >
+               @csrf
+           <div class="modal-dialog">
+
+               <!-- Modal content-->
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <h4 class="modal-title">Add Expenditure Form</h4>
+                   </div>
+
+
+       <div class="row">
+           <div class="col-md-3">
+               <label for="expenditure_desc" class="control-label" style="padding-left:50px">Description</label>
+           </div>
+           <div class="col-md-8">
+               <input type="text" class="form-control" name="expenditure_desc" id="expenditure_desc" placeholder="Customer's Expenditure Description">
+           </div>
+       </div>
+       <br>
+       <div class="row">
+           <div class="col-md-3">
+               <label for="total_expenditure" class="control-label" style="padding-left:50px">Total Expenditure</label>
+           </div>
+           <div class="col-md-8">
+               <input type="text" class="form-control" name="total_expenditure" id="total_expenditure" placeholder="Customer's Total Expenditure">
+           </div>
+       </div>
+       <br>
+       <div class="row">
+           <div class="col-md-3">
+               <label for="expenditure_note" class="control-label" style="padding-left:50px">Note</label>
+           </div>
+           <div class="col-md-8">
+               <textarea class="form-control" name="expenditure_note" id="expenditure_note" placeholder="Note If any"></textarea>
+           </div>
+       </div>
+       <br>
+       <div class="row">
+           <div class="col-md-3">
+               <label for="expenditure_proof" class="control-label" style="padding-left:50px">Proof Attachment</label>
+           </div>
+           <div class="col-md-8">
+               <input type="text" class="form-control" name="expenditure_proof" id="expenditure_proof" placeholder="">
+           </div>
+       </div>
+       <br>
+       <div class="row">
+           <div class="col-md-3">
+               <label for="expenditure_schedule" class="control-label" style="padding-left:50px">Expenditure Schedule</label>
+           </div>
+           <div class="col-md-8">
+               <input type="text" class="form-control" name="expenditure_schedule" id="expenditure_schedule" placeholder="Enter Your Expenditure Schedule">
+           </div>
+       </div>
+       <br>
+                   <div class="modal-footer">
+                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                       <button type="submit"  class="btn btn-success" >Add</button>
+                   </div>
+               </div></div></form></div>
+
+
+       <!-- Modal -->
+       <div class="modal fade" id="myModalIncome" role="dialog">
+           <form action="/incomeAdd" id="addIncome" method="POST" enctype="multipart/form-data" onsubmit=" " >
+               @csrf
+
+               <div class="modal-dialog">
+
+               <!-- Modal content-->
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <h4 class="modal-title">Add Income Form</h4>
+                   </div>
+
+       <div class="row">
+           <div class="col-md-3">
+               <label for="income_desc" class="control-label" style="padding-left:50px">Description</label>
+           </div>
+           <div class="col-md-8">
+               <input type="text" class="form-control txt" name="income_desc" id="incomeDesc_1" placeholder="Customer's Income Description">
+           </div>
+       </div>
+       <br>
+       <div class="row">
+           <div class="col-md-3">
+               <label for="total_income" class="control-label" style="padding-left:50px">Total Income</label>
+           </div>
+           <div class="col-md-8">
+               <input type="text" class="form-control txt" name="total_income" id="totalIncome_1"   placeholder="Customer's Total Income">
+           </div>
+       </div>
+       <br>
+       <div class="row">
+           <div class="col-md-3">
+               <label for="income_note" class="control-label" style="padding-left:50px">Note</label>
+           </div>
+           <div class="col-md-8">
+               <textarea class="form-control txt" name="income_note" id="incomeNote_1" placeholder="Note If any"></textarea>
+           </div>
+       </div>
+       <br>
+       <div class="row">
+           <div class="col-md-3">
+               <label for="income_proof" class="control-label" style="padding-left:50px">Proof Attachment</label>
+           </div>
+           <div class="col-md-8">
+               <input type="text" class="form-control txt"  name="income_proof" id="incomeProof_1" placeholder="">
+           </div>
+       </div>
+       <br>
+       <div class="row">
+           <div class="col-md-3">
+               <label for="income_date" class="control-label" style="padding-left:50px">Date of Income</label>
+           </div>
+           <div class="col-md-8">
+               <input type="text" class="form-control txt" name="income_date" id="incomeDate_1" placeholder="Enter Your Income Day">
+           </div>
+       </div>    <div class="modal-footer">
+                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                       <button type="submit"  class="btn btn-success" >Add</button>
+                   </div></div></div></form></div>
+       <script>
+    $(document).ready(function(){
+
+        var count = 0;
+
+        $('#user_dialog').dialog({
+            autoOpen:false,
+            width:400
+        });
+
+        $('#add').click(function(){
+            $('#user_dialog').dialog('option', 'title', 'Add Data');
+            $('#first_name').val('');
+            $('#last_name').val('');
+            $('#error_first_name').text('');
+            $('#error_last_name').text('');
+            $('#first_name').css('border-color', '');
+            $('#last_name').css('border-color', '');
+            $('#save').text('Save');
+            $('#user_dialog').dialog('open');
+        });
+
+        $('#save').click(function(){
+            var error_first_name = '';
+            var error_last_name = '';
+            var first_name = '';
+            var last_name = '';
+            if($('#first_name').val() == '')
+            {
+                error_first_name = 'First Name is required';
+                $('#error_first_name').text(error_first_name);
+                $('#first_name').css('border-color', '#cc0000');
+                first_name = '';
+            }
+            else
+            {
+                error_first_name = '';
+                $('#error_first_name').text(error_first_name);
+                $('#first_name').css('border-color', '');
+                first_name = $('#first_name').val();
+            }
+            if($('#last_name').val() == '')
+            {
+                error_last_name = 'Last Name is required';
+                $('#error_last_name').text(error_last_name);
+                $('#last_name').css('border-color', '#cc0000');
+                last_name = '';
+            }
+            else
+            {
+                error_last_name = '';
+                $('#error_last_name').text(error_last_name);
+                $('#last_name').css('border-color', '');
+                last_name = $('#last_name').val();
+            }
+            if(error_first_name != '' || error_last_name != '')
+            {
+                return false;
+            }
+            else
+            {
+                if($('#save').text() == 'Save')
+                {
+                    count = count + 1;
+                    output = '<tr id="row_'+count+'">';
+                    output += '<td>'+first_name+' <input type="hidden" name="hidden_first_name[]" id="first_name'+count+'" class="first_name" value="'+first_name+'" /></td>';
+                    output += '<td>'+last_name+' <input type="hidden" name="hidden_last_name[]" id="last_name'+count+'" value="'+last_name+'" /></td>';
+                    output += '<td><button type="button" name="view_details" class="btn btn-warning btn-xs view_details" id="'+count+'">View</button></td>';
+                    output += '<td><button type="button" name="remove_details" class="btn btn-danger btn-xs remove_details" id="'+count+'">Remove</button></td>';
+                    output += '</tr>';
+                    $('#user_data').append(output);
+                }
+                else
+                {
+                    var row_id = $('#hidden_row_id').val();
+                    output = '<td>'+first_name+' <input type="hidden" name="hidden_first_name[]" id="first_name'+row_id+'" class="first_name" value="'+first_name+'" /></td>';
+                    output += '<td>'+last_name+' <input type="hidden" name="hidden_last_name[]" id="last_name'+row_id+'" value="'+last_name+'" /></td>';
+                    output += '<td><button type="button" name="view_details" class="btn btn-warning btn-xs view_details" id="'+row_id+'">View</button></td>';
+                    output += '<td><button type="button" name="remove_details" class="btn btn-danger btn-xs remove_details" id="'+row_id+'">Remove</button></td>';
+                    $('#row_'+row_id+'').html(output);
+                }
+
+                $('#user_dialog').dialog('close');
+            }
+        });
+
+        $(document).on('click', '.view_details', function(){
+            var row_id = $(this).attr("id");
+            var first_name = $('#first_name'+row_id+'').val();
+            var last_name = $('#last_name'+row_id+'').val();
+            $('#first_name').val(first_name);
+            $('#last_name').val(last_name);
+            $('#save').text('Edit');
+            $('#hidden_row_id').val(row_id);
+            $('#user_dialog').dialog('option', 'title', 'Edit Data');
+            $('#user_dialog').dialog('open');
+        });
+
+        $(document).on('click', '.remove_details', function(){
+            var row_id = $(this).attr("id");
+            if(confirm("Are you sure you want to remove this row data?"))
+            {
+                $('#row_'+row_id+'').remove();
+            }
+            else
+            {
+                return false;
+            }
+        });
+
+        $('#action_alert').dialog({
+            autoOpen:false
+        });
+
+        $('#user_form').on('submit', function(event){
+            event.preventDefault();
+            var count_data = 0;
+            $('.first_name').each(function(){
+                count_data = count_data + 1;
+            });
+            if(count_data > 0)
+            {
+                var form_data = $(this).serialize();
+                $.ajax({
+                    url:"insert.php",
+                    method:"POST",
+                    data:form_data,
+                    success:function(data)
+                    {
+                        $('#user_data').find("tr:gt(0)").remove();
+                        $('#action_alert').html('<p>Data Inserted Successfully</p>');
+                        $('#action_alert').dialog('open');
+                    }
+                })
+            }
+            else
+            {
+                $('#action_alert').html('<p>Please Add atleast one data</p>');
+                $('#action_alert').dialog('open');
+            }
+        });
+
+    });
+</script>
 <script>
 function openPage(pageName,elmnt,color) {
   var i, tabcontent, tablinks;
@@ -487,6 +696,7 @@ function openPage(pageName,elmnt,color) {
   elmnt.style.backgroundColor = color;
 }
 document.getElementById("defaultOpen").click();
+
 </script>
 {{-- <br>
 <div class="box box-info">

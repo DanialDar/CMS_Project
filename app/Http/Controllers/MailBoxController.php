@@ -219,8 +219,8 @@ class MailBoxController extends Controller
             'port'          => 993,
             'encryption'    => 'ssl',
             'validate_cert' => true,
-            'username'      => '',
-            'password'      => '',
+            'username'      => 'rcms@dfspublications.co.uk',
+            'password'      => 'Rcms@01^',
             'protocol'      => 'imap'
         ]);
 
